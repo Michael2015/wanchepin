@@ -183,8 +183,8 @@ goList(e)
     app.varStorage.set('storeDetail', storelistItem[0])
     wx.navigateTo({
       //由之前的跳转到分享页面，现在直接跳转到商品详情页面
-      "url": "/pages/partner/detail/detail?id="+e.currentTarget.id,
-      //"url": "/pages/partner/share/index"
+      //"url": "/pages/partner/detail/detail?id="+e.currentTarget.id,
+      "url": "/pages/partner/share/index"
     });
   },
   //领取优惠券
