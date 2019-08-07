@@ -233,7 +233,7 @@ text.coupon3
   }
 
   .banner{
-    margin-top: 168rpx;
+    margin-top: 164rpx;
   }
   .banner swiper
   {

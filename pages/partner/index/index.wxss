@@ -8,7 +8,7 @@ page {
 }
 
 .view{
-  margin-top: 89rpx;
+  margin-top: 86rpx;
 }
 
 .page_set {
@@ -439,7 +439,7 @@ button{
 }
 .ding{
   position: fixed;
-  top: 89rpx;
+  top: 86rpx;
   width: 100%;
   z-index: 999;
   height: 66rpx;

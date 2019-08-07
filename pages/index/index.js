@@ -80,7 +80,7 @@ Page({
             // })
           } else if (res.is_promoter === 1) {
             // 用户是合伙人
-            app.globalData.role = 1
+            app.globalData.role = 0
             // wx.switchTab({
               // url: '/pages/partner/index/index'
               // url: '/pages/customer/index/index'
