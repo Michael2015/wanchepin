@@ -82,7 +82,8 @@ Page({
             // 用户是合伙人
             app.globalData.role = 1
             // wx.switchTab({
-            //   url: '/pages/partner/index/index'
+              // url: '/pages/partner/index/index'
+              // url: '/pages/customer/index/index'
             // })
           } else {
             wx.showToast('角色不存在')

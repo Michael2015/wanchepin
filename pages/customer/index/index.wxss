@@ -44,24 +44,45 @@ page {
     align-items: center;
 }
 
-.price {
+.volume {
     font-size: 24rpx;
     color: #c01f1f;
     line-height: 1;
     bottom: 22rpx;
-    position: absolute;
 }
-.price small{
+.volume small{
     color: #999;
 }
-
+.title_volume{
+    position: relative;
+}
+.commodity_list .commodity_item .volume .small{
+    color: #999;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+.commodity_showList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}
 .commodity_list {
-    height: calc(100vh - 328rpx);
+    /* height: calc(100vh - 328rpx); */ 
     margin-top: 0rpx
 }
 
 .commodity_list .commodity_item .title {
-    line-height: 32rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin-top: -5rpx;
+    height: 91rpx;
+    line-height: 40rpx;
 }
 
 .title_swiper {
@@ -83,8 +104,8 @@ page {
     width: 44rpx;
     height: 44rpx;
     position: absolute;
-    right: 12rpx;
-    bottom: 5rpx;
+    right: 24rpx;
+    bottom: 60rpx;
 }
 
 .no-data {
@@ -97,17 +118,45 @@ page {
 .commodity_list .commodity_item .coupon
 {
   position: absolute;
+  left: 0;
+  bottom: 180rpx;
 }
-.commodity_list .commodity_item text.coupon3
+text.coupon3
 {
-  color: #fff;
-  background: #e70002;  
+  color: #e70002;
+  background: #fff;  
   display: block;
-  font-size: 20rpx; 
+  font-size: 25rpx; 
   width: 120rpx;
-  height: 30rpx;
-  line-height: 30rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 30rpx;
   text-align: center;
+  border: 1rpx solid #e70002;
+}
+.Replace{
+    width: 45%;
+    background: rgba(0, 0, 0, 0);
+}
+.Free-sheet{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 25rpx;
+    background: #e70002;
+    color: #fff;
+    padding: 10rpx;
+    border-radius: 0 15rpx 0 15rpx;
+}
+.commodity_list .commodity_item .volume .bold
+{
+  color: #e70002;
+  font-weight: bold;
+  font-size: 30rpx;
+}
+.commodity_list .commodity_item .volume .bold .Supporting
+{
+  font-size: 24rpx;
 }
 .commodity_list .commodity_item  em.text-u
 {
@@ -194,4 +243,210 @@ page {
   {
     width: 100%;
     height: 240rpx;
+  }
+  .ding{
+    position: fixed;
+    top: 164rpx;
+    width: 100%;
+    z-index: 999;
+    height: 66rpx;
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    box-shadow:0px 2rpx 0px 0px rgba(0,0,0,0.05),0px 2rpx 0px 0px rgba(0,0,0,0.05);
+  }
+  .countTop{
+    padding-bottom: 20rpx;
+  }
+.btn-area-nav{
+    position: relative;
+}
+.btn-area-nav .category
+{
+  /* margin-top: 119rpx; */
+  height: 100rpx;
+  display: flex;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:0px 2rpx 0px 0px rgba(0,0,0,0.05),0px 2rpx 0px 0px rgba(0,0,0,0.05);
+}
+.category button{
+    line-height: 100rpx;
+    background: #fff;
+    color: #E60000
+}
+.btn-area-nav .category-ding
+{
+  margin-top: 66rpx;
+}
+.btn-area-nav  button
+{
+  padding: 0;
+  background: #fff;
+  color: #999999;
+  font-size: 26rpx;
+  border-radius: 0;
+  text-align: center;
+}
+.btn-area-nav  button span
+{
+  background: #fd5458;
+  padding: 3rpx 8rpx;
+  border-radius: 5rpx;
+  font-weight: bold;
+}
+.btn-area-nav  button.active
+{
+  color: #E60000;
+  font-weight: bold;
+}
+.btn-area-nav  button.active::after
+{
+  width: 30rpx;
+  height: 5rpx;
+  background: #E60000;
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0;
+}
+.btn-area-nav .category button image
+{
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.btn-area-nav .more
+{
+  position: absolute;
+  width: 16.6%;
+  right: 0;
+  top: 65rpx;
+  z-index: 1;
+}
+.transverseCar{
+    width: 100%;
+    height: 350rpx;
+    background: #fff;
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: column;
+}
+.transverseCar .carTit{
+    padding: 10rpx 19rpx;
+    width: 100%;
+    font-size: 30rpx;
+    color: #333333
+}
+.transverseCar .scroll-view-H{
+    flex: 1;
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: nowrap;
+    /* flex-shrink: 0; */
+    margin-top: 10rpx;
+}
+.transverseCarItem{
+    position: relative;
+    display: inline-flex;
+    width: 80%;
+    /* border: 1rpx solid red; */
+    padding: 10rpx 0;
+    overflow: hidden;
+  }
+  .transverseCarItem-one{
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    /* border: 1rpx solid red; */
+    padding: 10rpx 0;
+    overflow: hidden;
+  }
+  .transverseCarItem-one .Sale{
+    margin-right: 20rpx;
+  }
+  .item-img{
+    margin-left: 10rpx;
+    border-radius: 15rpx;
+    width: 250rpx;
+    height: 250rpx;
+  }
+  .item-title{
+    /* border:1rpx solid blue; */
+    /* width: 480rpx; */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 10rpx;
+    font-size: 28rpx;
+    position: relative;
+    height: 250rpx;
+    width: 275rpx;
+  }
+  .top{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+  .bottom{
+    flex: 1;
+  }
+  .item-title .title-warp{
+    white-space: pre-wrap;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: break-all; */
+  }
+.item-title .Sale{
+    color: #999999;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.item-title .money{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    color: #E60000;
+}
+.money .mainShow{
+    font-size: 30rpx;
+}
+.money .secondaryShow{
+    font-size: 20rpx;
+}
+.transverseCar-coupon{
+    position: absolute;
+    left: 0;
+    bottom: 10rpx;
+}
+.transverseCar-Free-sheet{
+    position: absolute;
+    right: 340rpx;
+    top: 0;
+    font-size: 25rpx;
+    background: #e70002;
+    color: #fff;
+    padding: 10rpx;
+    border-radius: 0 15rpx 0 15rpx;
+  }
+  .transverseCar-Free-sheet-one{
+    position: absolute;
+    right: 490rpx;
+    top: 0;
+    font-size: 25rpx;
+    background: #e70002;
+    color: #fff;
+    padding: 10rpx;
+    border-radius: 0 15rpx 0 15rpx;
   }

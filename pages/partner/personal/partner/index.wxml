@@ -2,10 +2,10 @@
 <scroll-view scroll-y="{{true}}">
 <view class="wrap">
   <view class="top">
-    <view class="avatar">
+    <!-- <view class="avatar">
       <image src="{{avatar}}"></image>
-    </view>
-    <view class="name">{{name}}</view>
+    </view> -->
+    <view class="name">下级合伙人</view>
     <view class="sum"><text>{{all}}</text> 人</view>
   </view>
   <view class="search-wrap">
@@ -23,11 +23,35 @@
   </view>
   <no-data wx:if="{{list&&list.length === 0}}" />
   <view class="bottom">
-    <button class="btn" open-type="share">邀请合伙人</button>
+    <button class="btn"  bindtap="checkoutFenXiang">邀请合伙人</button>
     <!-- 显示上级合伙人的按钮 -->
     <!-- <view class="contact" bindtap="showHigher"><image src="{{higher.avatar||default}}" wx:if="{{higher||default}}"></image></view> -->
   </view>
   <!-- 弹出上级 -->
   <contact-user id="contact-view"></contact-user>
+  <view class="fenxiang-mask" wx:if="{{fenXiangShow}}">
+      <view class="select">
+        <view class="select-top">
+          <view class="top-item">
+            <button class="item-botton" bindtap="checkoutFenXiang" open-type="share">
+              <image src="/assets/image/weChatFriend.png" mode="widthFix" class="fenXiang-img"></image>
+              <view class="botton-title">微信好友</view>
+            </button>
+          </view>
+          <view class="top-item">
+           <!-- bindtap="getShareImg" -->
+            <button class="item-botton" bindtap="getShareImg">
+              <image src="/assets/image/pengyouquan.png" mode="widthFix" class="fenXiang-img"></image>
+              <view class="botton-title">朋友圈</view>
+            </button>
+          </view>
+        </view>
+        <view class="select-bottom">
+          <button class="exit" bindtap="checkoutFenXiang">取消</button>
+        </view>
+      </view>
+    </view>
 </view>
 </scroll-view>
+<canvas canvas-id='sharePosterCanvas' style='width:560px;height:800px;'></canvas>
+<share-poster id="sharePoster-view"></share-poster>

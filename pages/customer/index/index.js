@@ -18,6 +18,12 @@ Page({
     coupon_price:0,
     pid:0,
     bannerList:[],
+    categoryList1:[], //横向导航栏
+    heightCount:0,   //统计监控交互的高度
+    scrollTop:0,    //监控滑动距离
+    transverseCar_cateId:0,  //车联网专区的分类id
+    transverseCarList:[],    //车联网专区显示数据
+    selectClassId:0         //标识选择id
   },
   getnotice() {
     app.http.get('/api/customer/mall/getnotice').then(res => {
@@ -167,6 +173,7 @@ Page({
         })
       }
     })
+    this.CalculationHeight()
   },
   contact() {
     Contact.show(this.data.getPartnerInfo)
@@ -177,7 +184,10 @@ Page({
       this.getTabBar().toggleToClient()
     }
   },
-  onShow: function () {
+  onPageScroll:function(res){
+    this.setData({ scrollTop: res.scrollTop })
+  },
+  onShow: async function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -195,9 +205,74 @@ Page({
       this.getProductList()
     }
 
-     //获取banner轮播广告
-     this.getBanner();
+    //获取banner轮播广告
+    this.getBanner();
+    await this.getCategory()
+    //获取车联网专区数据
+    this.getTransverseCarData();
   },
+  async getCategory()
+  {
+    const categoryList = await app.http.post('/api/marketing/getCategory', {})
+    let categoryList1 = categoryList.filter(function(item,index){
+      return index != 0;
+    });
+    // this.setData({
+    //   selectClassId:categoryList1[0].id
+    // })
+    let transverseCar = categoryList.filter(function(item,index){
+      return index === 0
+    })
+    this.setData({
+      transverseCar_cateId:transverseCar[0].id
+    })
+    // console.log(transverseCar[0].id)
+    // let categoryList2 = categoryList.filter(function(item,index){
+    //   return index >= 4;
+    // });
+    this.setData({
+      categoryList1: categoryList1,
+      // categoryList2:categoryList2
+    })
+  },
+  // 获取车联网专区的数据
+  getTransverseCarData(){
+    app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
+      this.setData({transverseCarList:res})
+    })
+  },
+  async CalculationHeight(){
+    let height = 0;
+    let query = wx.createSelectorQuery()
+    const lun = query.select('.countTop')
+    const res = await new Promise((resolve, reject) => {
+      lun.fields({
+        dataset: true,
+        size: true,
+        scrollOffset: true,
+        properties: ['scrollX', 'scrollY']
+      }, function (res) {
+        resolve(res)
+      }).exec()
+    })
+    height = res.height
+    // console.log(res)
+    this.setData({heightCount:height})
+  },
+  //跳转分类列表页面
+goList(e)
+{
+  let cat_id = e.currentTarget.dataset.id;
+  this.setData({
+    selectClassId:cat_id
+  })
+  app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
+    this.setData({getProductList:res})
+  })
+  // wx.navigateTo({
+  //   "url": "/pages/common/list/index?cate_id="+cat_id,
+  // });
+},
   touchMove() {
     return
   },

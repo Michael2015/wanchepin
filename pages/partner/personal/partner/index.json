@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "contact-user": "/utils/contactUser/index"
+    "contact-user": "/utils/contactUser/index",
+    "share-poster": "/utils/sharePoster/index"
   },
   "navigationBarTitleText": "我的伙伴",
   "navigationBarBackgroundColor": "#ededed",

@@ -73,39 +73,65 @@ Component({
     createCanvas(img0, img1, store_name) {
       self = this;
       Promise.all([
-        downFile(img0),
-        downFile(img1)
+        downFile(img0)
       ]).then(res => {
         //setTimeout(() => {
-        let [qrcode, commodity] = [...res]
-        console.log(commodity.path)
-        let ctx = wx.createCanvasContext('posterCanvas')
-        ctx.rect(0, 0, 560, 800)
-        ctx.setFillStyle('#ffffff')
-        ctx.fill()
-        let height = commodity.height * (560 / commodity.width);
-        ctx.drawImage(commodity.path, 0, 0, 560, height)
-        ctx.setFillStyle('#ffffff')
-        height = height > 560 ? 560 : height;
-        height = height < 500 ? 560 : height;
-        // console.log(height, '======================')
-        ctx.fillRect(0, height, 560, 241)
-        ctx.drawImage(qrcode.path, 339, 600, 163, 163)
-        let rectangleTop = height - 44;
-        ctx.setFillStyle('#f55254')
-        ctx.fillRect(0, rectangleTop, 560, 44)
-        ctx.font = 'normal 100 26px sans-serif';
-        ctx.setFillStyle('#FFFFFF')
+          console.log(res)
+        let [qrcode] = [...res]
+        console.log(qrcode)
+        let ctx = wx.createCanvasContext('sharePosterCanvas')
+        ctx.drawImage('/assets/image/fenxiangBackground.png', 0, 0, 560, 800)
+        // ctx.rect(0, 0, 560, 800)
+        // ctx.setFillStyle('#ffffff')
+        // ctx.fill()
+        // let height = commodity.height * (560 / commodity.width);
+        // ctx.drawImage(commodity.path, 0, 0, 560, height)
+        // ctx.setFillStyle('#ffffff')
+        // height = height > 560 ? 560 : height;
+        // height = height < 500 ? 560 : height;
+        // // console.log(height, '======================')
+        // ctx.fillRect(0, height, 560, 241)
+        // ctx.drawImage(qrcode.path, 339, 600, 163, 163)
+        // let rectangleTop = height - 44;
+        // ctx.setFillStyle('#f55254')
+        // ctx.fillRect(0, rectangleTop, 560, 44)
+        // ctx.font = 'normal 100 26px sans-serif';
+        // ctx.setFillStyle('#FFFFFF')
+        // let store_nameTextPx = ctx.measureText(store_name)
+        // if (store_nameTextPx.width >= 560) {
+        //   store_name = store_name.substr(0, 15) + '...'
+        //   store_nameTextPx = ctx.measureText(store_name)
+        // }
+        // ctx.fillText(store_name, ((560 - store_nameTextPx.width) / 2), rectangleTop + 32, 560)
+        // ctx.drawImage('/assets/image/blessing.png', 61, 643)
+        
+        ctx.font = 'normal 100 32px sans-serif';
+        ctx.setFillStyle('#fff')
         let store_nameTextPx = ctx.measureText(store_name)
         if (store_nameTextPx.width >= 560) {
           store_name = store_name.substr(0, 15) + '...'
           store_nameTextPx = ctx.measureText(store_name)
         }
-        ctx.fillText(store_name, ((560 - store_nameTextPx.width) / 2), rectangleTop + 32, 560)
-        ctx.drawImage('/assets/image/blessing.png', 61, 643)
+        ctx.fillText(store_name, (560 - store_nameTextPx.width) / 2,120)
+
+        let bing = '返利与免单双翼，助您财富梦想腾飞'
+        ctx.font = 'normal 100 26px sans-serif';
+        ctx.setFillStyle('#fff')
+        let bingText = ctx.measureText(bing)
+        ctx.fillText(bing, (560 - bingText.width) / 2, 170)
+
+        let height = qrcode.height * (300 / qrcode.width);
+        ctx.drawImage(qrcode.path, (560-300)/2, 300, 300, height)
+
+        // let sao = '打开微信扫一扫'
+        // ctx.font = 'normal 100 26px sans-serif';
+        // ctx.setFillStyle('#666')
+        // let saoText = ctx.measureText(sao)
+        // ctx.fillText(sao, (560 - saoText.width) / 2, 740)
+
         ctx.draw(true, () => {
           wx.canvasToTempFilePath({
-            canvasId: 'posterCanvas',
+            canvasId: 'sharePosterCanvas',
             x: 0,
             y: 0,
             destWidth: 1120,
@@ -194,14 +220,15 @@ Component({
       })
     },
     createPoster(props) {
+      console.log(props)
       wx.showLoading({
         mask: true
       })
       app.http.get('/api/partner.partner/getQrCode', {
-        page: 'pages/index/index',
-        scene: `${props[0].data.uid},${props[0].data.pid},${props[0].data.id}`
+        page: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',
+        scene: `${props[0].data.uid},${props[0].data.pid}`
       }).then(res => {
-        this.createCanvas(res.replace('.', app.globalData.HOST), props[0] ? props[0].data.image : {}, props[0].data.store_name)
+        this.createCanvas(res.replace('.', app.globalData.HOST), props[0] ? props[0].data.image : {}, `好友${app.globalData.userInfo.nickName}邀请您成为业务合伙人`)
       })
       // 这里的链接是不经过 app.http 方法的
       // this.createCanvas(`${app.globalData.HOST}/api/partner.partner/getQrCodes?token=${app.globalData.token}&page=pages/index/index&scene=${props[0].data.uid},${props[0].data.pid},${props[0].data.id}`, props[0] ? props[0].data.image : {}, props[0].data.store_name);

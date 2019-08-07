@@ -7,8 +7,7 @@ let compositeposter;
 
 var compositePoster = (fun, props = undefined) => {
     return new Promise(function (resolve, reject) {
-        compositeposter = getContext().selectComponent('#compositePoster-view');
-        console.log(compositeposter)
+      compositeposter = getContext().selectComponent('#sharePoster-view');
         if (!compositeposter) {
             console.warn('未找到节点，请在wxml里添加');
         } else {

@@ -1,0 +1,87 @@
+/* pages/partner/personal/data/index.wxss */
+page{
+  height: 100%;
+}
+.warp{
+  width: 100%;
+  height: 100%;
+}
+.warp .warp-item{
+  padding: 30rpx 10rpx;
+  border-bottom: 1rpx solid rgb(184, 52, 52);
+  display: flex;
+  justify-content: space-between;
+  font-size: 30rpx;
+}
+.warp-item .item-content{
+  color: #999;
+}
+.item-title .question{
+  width: 35rpx;
+  border-radius: 50%;
+  margin-left: 10rpx;
+  vertical-align:text-bottom;
+}
+.item-content .avatar{
+  width: 150rpx;
+}
+.item-content .add{
+  color: red;
+}
+.item-content .call .phone{
+  width: 40rpx;
+  margin-left: 10rpx;
+  vertical-align:middle;
+}
+.avatar-title{
+  line-height: 150rpx;
+}
+.mask{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.mask .phone-warp{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 400rpx;
+  height: 300rpx;
+  background: white;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.phone-warp .input-warp{
+  border-bottom: 1rpx solid #999;
+  height: 100rpx;
+  position: relative;
+}
+.phone-warp .phone-input{
+  width: 80%;
+  height: 50rpx;
+  position: absolute;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.button-warp{
+  display: flex;
+}
+.button-warp .tabMask{
+  border-top: 1rpx solid gray;
+  width: 50%;
+  border-radius: 0;
+  /* position: absolute;
+  bottom: 0; */
+}
+.button-warp .tabMaskR{
+  border-right: 1rpx solid gray;
+}

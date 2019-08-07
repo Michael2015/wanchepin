@@ -9,7 +9,8 @@ Page({
     inited: false,
     name:'',
     avatar: '',
-    num:0
+    num:0,
+    partner_level:''
   },
   to: function(e) {
     const data = e.currentTarget.dataset
@@ -26,7 +27,8 @@ Page({
         this.setData({
           num: data.member_nums,
           name: this.cut(user.nickName),
-          avatar: user.avatarUrl
+          avatar: user.avatarUrl,
+          partner_level:user.partner_level
         })
       }
       this.data.inited = true

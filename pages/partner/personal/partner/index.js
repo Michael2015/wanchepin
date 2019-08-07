@@ -1,6 +1,7 @@
 // pages/partner/personal/partner/index.js
 import Contact from '../../../../utils/contactUser/contactUser'
 import searchProxy from '../../../../utils/searchProxy/index'
+import sharePoster from '../../../../utils/sharePoster/sharePoster.js'
 const app = getApp()
 Page({
 
@@ -13,7 +14,8 @@ Page({
     list: [],
     all: 0,
     higher: null,
-    default: ''
+    default: '',
+    fenXiangShow: false,  //分享是否显示
   },
 
   /**
@@ -43,6 +45,19 @@ Page({
           default: data.avatar
         })
       }
+    })
+  },
+  // 切换分享显示
+  checkoutFenXiang() {
+    this.setData({ fenXiangShow: !this.data.fenXiangShow })
+  },
+  getShareImg() {
+    this.checkoutFenXiang()
+    sharePoster.createPoster({
+      data: Object.assign({
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.userInfo.uid
+      })
     })
   },
   oninput({detail}) {

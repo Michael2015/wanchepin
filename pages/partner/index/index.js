@@ -1,3 +1,4 @@
+import sharePoster from '../../../utils/sharePoster/sharePoster.js'
 const app = getApp()
 let text = '';
 let self;
@@ -24,6 +25,22 @@ Page({
     isShowCategory:0,//是否显示分类
     categoryList1:[],
     categoryList2:[],
+    fenXiangShow:false,  //分享是否显示
+    heightCount:0,   //统计监控交互的高度
+    scrollTop:0,    //监控滑动距离
+    tabTime:'',
+    transverseCar_cateId:0,  //车联网专区的分类id
+    transverseCarList:[],    //车联网专区显示数据
+    selectClassId:0         //标识选择id
+  },
+  getShareImg() {
+    sharePoster.createPoster({
+      data: Object.assign({
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.userInfo.uid
+      })
+    })
+    this.checkoutFenXiang()
   },
   getinfo() {
     app.http.get('/api/partner/home/getinfo').then(res => {
@@ -38,11 +55,10 @@ Page({
   storelist() {
     this.data.isAllowLoad = false;
     let timeList2 = [];
-    app.http.post('/api/partner/home/storelist', {
-      page: this.data.page,
-      limit: this.data.limit,
-      keyword: this.data.keyword
-    }).then(res => {
+    // 针对用户进来选择了分类以及没有选择分类时下拉触发所要请求接口不同的处理
+    const apiUrl = this.data.selectClassId === 0?'/api/partner/home/storelist':'/api/marketing/getCategoryProducts'
+    const httpObj = this.data.selectClassId === 0?{page: this.data.page,limit: this.data.limit,keyword: this.data.keyword}:{cate_id:this.data.selectClassId}
+    app.http.post(apiUrl, httpObj).then(res => {
       let storelist = this.data.storelist.concat(res);
       //处理倒计时
       for(let key in storelist)
@@ -79,31 +95,53 @@ Page({
     });
   },
 //获取首页分类
-getCategory()
+async getCategory()
 {
-  app.http.post('/api/marketing/getCategory', {}).then(res => {
-    let categoryList = res;
-    let categoryList1 = categoryList.filter(function(item,index){
-      return index < 4;
-    });
-    let categoryList2 = categoryList.filter(function(item,index){
-      return index >= 4;
-    });
-    this.setData({
-      categoryList1:categoryList1,
-      categoryList2:categoryList2
-    })
+  const categoryList = await app.http.post('/api/marketing/getCategory', {})
+  let categoryList1 = categoryList.filter(function(item,index){
+    return index != 0;
   });
+  // this.setData({
+  //   selectClassId:categoryList1[0].id
+  // })
+  let transverseCar = categoryList.filter(function(item,index){
+    return index === 0
+  })
+  this.setData({
+    transverseCar_cateId:transverseCar[0].id
+  })
+  // console.log(transverseCar[0].id)
+  // let categoryList2 = categoryList.filter(function(item,index){
+  //   return index >= 4;
+  // });
+  this.setData({
+    categoryList1: categoryList1,
+    // categoryList2:categoryList2
+  })
+},
+// 获取车联网专区的数据
+getTransverseCarData(){
+  // console.log(this.data.transverseCar_cateId)
+  app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
+    // this.setData({transverseCarList:[res[0]]})
+    this.setData({transverseCarList:res})
+    console.log(res)
+  })
 },
 //跳转分类列表页面
 goList(e)
 {
-  let cat_id = e.currentTarget.id;
-  wx.navigateTo({
-    "url": "/pages/common/list/index?cate_id="+cat_id,
-  });
+  let cat_id = e.currentTarget.dataset.id;
+  this.setData({
+    selectClassId:cat_id
+  })
+  app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
+    this.setData({storelist:res})
+  })
+  // wx.navigateTo({
+  //   "url": "/pages/common/list/index?cate_id="+cat_id,
+  // });
 },
-
   timeFormat(param){//小于10的格式化函数
     return param < 10 ? '0' + param : param; 
   },
@@ -151,6 +189,7 @@ goList(e)
   },
   onLoad() {
     this.getinfo()
+    this.CalculationHeight()
     self = this;
     // let si = setInterval(() => {
     //   this.setData({
@@ -183,8 +222,8 @@ goList(e)
     app.varStorage.set('storeDetail', storelistItem[0])
     wx.navigateTo({
       //由之前的跳转到分享页面，现在直接跳转到商品详情页面
-      //"url": "/pages/partner/detail/detail?id="+e.currentTarget.id,
-      "url": "/pages/partner/share/index"
+      "url": "/pages/partner/detail/detail?id="+e.currentTarget.id,
+      // "url": "/pages/partner/share/index"
     });
   },
   //领取优惠券
@@ -224,7 +263,10 @@ goList(e)
     isShowCategory = isShowCategory ? false :true;
     this.setData({isShowCategory:isShowCategory});
   },
-
+  // 切换分享显示
+  checkoutFenXiang(){
+    this.setData({fenXiangShow:!this.data.fenXiangShow})
+  },
    //领取优惠券
    get_coupon()
    {
@@ -295,7 +337,33 @@ goList(e)
     })
     this.storelist()
   },
-  onShow: function () {
+  async CalculationHeight(){
+    let height = 0;
+    let query = wx.createSelectorQuery()
+    const lun = query.select('.countTop')
+    const res = await new Promise((resolve, reject) => {
+      lun.fields({
+        dataset: true,
+        size: true,
+        scrollOffset: true,
+        properties: ['scrollX', 'scrollY']
+      }, function (res) {
+        resolve(res)
+      }).exec()
+    })
+    height = res.height
+    // console.log(res)
+    this.setData({heightCount:height})
+  },
+  MonitorNav(event){
+    // var nowTime = new Date();
+    // if (nowTime - this.data.tapTime < 300) {
+    //   return;
+    // }
+    // this.setData({ tapTime: nowTime });
+    this.setData({ scrollTop: event.detail.scrollTop})
+  },
+  onShow: async function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -320,11 +388,17 @@ goList(e)
     //获取banner轮播广告
     this.getBanner();
     //获取分类
-    this.getCategory();
+    await this.getCategory();
+    //获取车联网专区数据
+    this.getTransverseCarData();
+  },
+  onPageScroll:function(res){
+    this.setData({ scrollTop: res.scrollTop })
   },
   onShareAppMessage: function () {
+    console.log(app.globalData)
     return {
-      title: '邀请你成为业务合伙人！',
+      title: `${app.globalData.userInfo.nickName}邀请你成为业务合伙人！`,
       path: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',
       imageUrl: '/assets/image/partner_share_poster.png'
     }
