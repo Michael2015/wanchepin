@@ -163,7 +163,7 @@ text.coupon3
     position: absolute;
     right: 9.5rpx;
     top: 0;
-    font-size: 25rpx;
+    font-size: 20rpx;
     background: #e70002;
     color: #fff;
     padding: 10rpx;
@@ -462,19 +462,19 @@ text.coupon3
     position: absolute;
     right: 340rpx;
     top: 0;
-    font-size: 25rpx;
+    font-size: 20rpx;
     background: #e70002;
     color: #fff;
     padding: 10rpx;
-    border-radius: 0 15rpx 0 15rpx;
+    border-radius: 0 0 0 15rpx;
   }
   .transverseCar-Free-sheet-one{
     position: absolute;
     right: 490rpx;
     top: 0;
-    font-size: 25rpx;
+    font-size: 20rpx;
     background: #e70002;
     color: #fff;
     padding: 10rpx;
-    border-radius: 0 15rpx 0 15rpx;
+    border-radius: 0 0 0 15rpx;
   }
