@@ -35,16 +35,14 @@
                     <view class="title title2">实付金额：¥ <em>{{pay_price}}</em>元</view> 
                     <!-- <van-stepper value="{{ 1 }}" bind:change="onChange" /> -->
                 </view>
-                <view class="attach_product">
-                    <view class="title">赠送产品：{{price.attach_product}}</view> 
-                </view>
             </view>
-            <view class="leaveMsg" wx:if="{{is_show_action}}">
+            <view class="leaveMsg">
                 <image src="/assets/image/msg.png" mode="widthFix"></image>
-                <input placeholder="留言内容/备注 （ 选填 ）最多100字符" placeholder-class="search_input_placeholder" bindinput="{{is_show_action?'setMark':''}}" value="{{mark}}" maxlength="100"/>
+                <input placeholder="留言内容/备注 （ 选填 ）最多100字符" placeholder-class="search_input_placeholder" bindinput="{{is_show_action?'setMark':''}}" value="{{mark}}" disabled="{{is_show_action?'disabled':''}}" maxlength="100"/>
             </view>
             <view style="height:100rpx"></view>
         </scroll-view>
-        <button class="confirm" form-type="submit" loading="{{disabled_loading}}" disabled="{{disabled_loading}}">立即付款</button>
+        <button class="confirm" form-type="submit" loading="{{disabled_loading}}" disabled="{{disabled_loading}}">立即购买</button>
     </form>
 </view>
+<popup-miandan ref="miandan"></popup-miandan>

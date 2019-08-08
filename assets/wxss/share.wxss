@@ -5,7 +5,7 @@ page {
 .godetail {
   width: 290rpx;
   height: 290rpx;
-  margin: 89rpx auto 43rpx auto;
+  margin: 0rpx auto;
   position: relative;
   border-radius: 12rpx;
   overflow: hidden;
@@ -101,9 +101,9 @@ page {
 }
 .godetail2
 {
-    margin-top: 0rpx;
+    margin-bottom: 50rpx;
     border-radius:0rpx;
-    height: 150rpx;
+    height: 100rpx;
 }
 .godetail2 view 
 {

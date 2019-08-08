@@ -51,11 +51,11 @@
                         </view>
                         <view class="bottom">
                             <text class="money">
-                                <text class="secondaryShow">￥</text>
+                                <text class="secondaryShow">价格￥</text>
                                 <text class="mainShow">{{divisionMoney.division(item.price)[0]}}</text>
                                 <text class="secondaryShow">.{{divisionMoney.division(item.price)[1]}}</text>
                             </text>
-                            <text class="Sale">销售{{item.sales>999?'999+':item.sales}}</text>
+                            <text class="Sale">销售 {{item.sales>999?'999+':item.sales}}</text>
                         </view>
                     </view>
                 </view>
@@ -149,7 +149,7 @@
                             </view>
                             <view class="volume">  
                                 <block wx:if="{{item.seckill.status == 0 || item.seckill.status == -1}}"><em  class="bold"><text class="Supporting">￥</text>{{divisionMoney.division(item.price)[0]}}<text class="Supporting">.{{divisionMoney.division(item.price)[1]}}</text></em></block> 
-                                <block wx:if="{{item.seckill.status == 1}}"><em class="bold"><text class="Supporting">￥</text>{{divisionMoney.division(item.seckill.data.price)[0]}}<text class="Supporting">.{{divisionMoney.division(item.seckill.data.price)[1]}}</text></em> <em class="text-u">￥{{item.price}}</em></block>  <small class="small">销量{{item.sales>999?'999+':item.sales}} </small>
+                                <block wx:if="{{item.seckill.status == 1}}"><em class="bold"><text class="Supporting">￥</text>{{divisionMoney.division(item.seckill.data.price)[0]}}<text class="Supporting">.{{divisionMoney.division(item.seckill.data.price)[1]}}</text></em> <em class="text-u">￥{{item.price}}</em></block>  <small class="small">销量 {{item.sales>999?'999+':item.sales}} </small>
                             </view>
                         </view>
                         </view>
@@ -206,7 +206,7 @@
           </view>
         </view>
         <view class="select-bottom">
-          <button class="exit" bindtap="checkoutFenXiang">取消</button>
+          <button class="exit" bindtap="checkoutFenXiang">×</button>
         </view>
       </view>
     </view>

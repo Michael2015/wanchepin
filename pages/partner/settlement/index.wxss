@@ -189,25 +189,3 @@ font-weight:bold;
     margin: auto 0;
     right: 24rpx;
 }
-.attach_product
-{
-    border-top: 1rpx solid #e4e4e4;
-    margin-top: 32rpx;
-    padding-top: 32rpx;
-    font-size:29rpx;
-    color: #999999;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,7 +12,7 @@
             <view>如您选择加入免单奖励计划，该商品不适用7天无理由退货规则。</view>
             <view wx:if="{{miandanma}}" class="extra">幸运码：{{miandanma}}</view>
             <view wx:if="{{position}}" class="extra">待免单人数：{{position}}</view>
-            <view class="goDetail" bindtap="goDetail">了解免单奖励规则》</view>
+            <view class="goDetail" bindtap="goDetail">《了解免单奖励规则》</view>
         </view>
         <button class="goOrder" bindtap="goOrder">查看订单</button>
         <button class="goIndex" bindtap="goIndex">返回首页</button>

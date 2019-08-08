@@ -110,7 +110,6 @@ Page({
     app.varStorage.set('isShareBack', 1)
   },
   getShareImg() {
-    console.log(self.data.info)
     compositePoster.createPoster({
       data: Object.assign(self.data.info, {
         uid: app.globalData.userInfo.uid,

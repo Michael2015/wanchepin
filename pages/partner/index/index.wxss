@@ -17,7 +17,7 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fff
+  background: #fff;
 }
 
 .commodity_showList{
@@ -58,10 +58,10 @@ page {
   margin-top: 20rpx;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .transverseCar .carTit{
   padding: 10rpx 19rpx;
-  width: 100%;
   font-size: 30rpx;
   color: #333333
 }
@@ -104,8 +104,7 @@ page {
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin-left: 10rpx;
-  padding-right: 20rpx;
+  padding: 0 19rpx;
   font-size: 28rpx;
   position: relative;
   height: 250rpx;
@@ -141,6 +140,7 @@ page {
   position: absolute;
   right: 0;
   bottom: 0;
+  font-size: 24rpx;
 }
 .item-title .money{
   position: absolute;
@@ -152,7 +152,7 @@ page {
   font-size: 30rpx;
 }
 .money .secondaryShow{
-  font-size: 20rpx;
+  font-size: 24rpx;
 }
 
 .share_btn {
@@ -171,10 +171,9 @@ page {
 }
 .index_search_swiper {
   font-size: 26rpx;
-  /* width: 542rpx; */
+  line-height: 60rpx;
   width: 100%;
   height: 60rpx;
-  line-height: 60rpx;
   color: #e70002;
 }
 
@@ -276,18 +275,18 @@ page {
 .commodity_list .commodity_item .coupon
 {
   position: absolute;
-  left: 20rpx;
-  bottom: 180rpx;
+  left: 28rpx;
+  bottom: 175rpx;
 }
 text.coupon3
 {
   color: #e70002;
   background: #fff;
   display: block;
-  font-size: 25rpx; 
-  width: 120rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  font-size: 20rpx; 
+  width: 110rpx;
+  height: 35rpx;
+  line-height: 35rpx;
   border-radius: 30rpx;
   text-align: center;
   border: 1rpx solid #e70002;
@@ -326,18 +325,19 @@ button{
   background-color: #fff;
 }
 .select-top{
-  height: 140rpx;
   display: flex;
   justify-content: space-around;
 }
 .top-item{
-  height: 100%;
-  width: 240rpx;
+  width: 220rpx;
   /* border: 1px solid black; */
 }
-.item-botton{
-  height: 100%;
+.select-top .item-botton{
+  height: 160rpx;
   position: relative;
+  margin: 20rpx;
+  padding: 0;
+  line-height: 2.5em;
 }
 .fenXiang-img{
   width: 120rpx;
@@ -346,19 +346,25 @@ button{
   font-size: 25rpx;
   position: absolute;
   left: 50%;
-  bottom: 0;
+  width: 100%;
+  top: 60%;
+  color: #555;
   transform: translateX(-50%)
 }
 .select-bottom{
   margin-top: 10rpx;
   height: 40rpx;
 }
-.exit{
-  height: 100%;
-  border-radius: 0;
-  font-size: 25rpx;
-  line-height: 40rpx;
-  opacity: 1
+.select-bottom .exit{
+  height: 40rpx;
+  width: 40rpx;
+  border-radius: 50rpx;
+  font-size: 35rpx;
+  position: absolute;
+  top: -40rpx;
+  right: 0;
+  padding: 0;
+  line-height: 35rpx;
 }
 .modal-mask {
   width: 100%;

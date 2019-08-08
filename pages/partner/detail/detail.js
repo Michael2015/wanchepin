@@ -216,7 +216,6 @@ Page({
           coupon_price:res.coupon.data.price||0,
           coupon_date:res.coupon.data.date||'',
           seckill:res.seckill,
-          attach_product:res.attach_product,
         }
       });
     }).catch((e) => {

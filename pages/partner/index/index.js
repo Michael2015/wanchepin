@@ -101,31 +101,20 @@ async getCategory()
   let categoryList1 = categoryList.filter(function(item,index){
     return index != 0;
   });
-  // this.setData({
-  //   selectClassId:categoryList1[0].id
-  // })
   let transverseCar = categoryList.filter(function(item,index){
     return index === 0
   })
   this.setData({
     transverseCar_cateId:transverseCar[0].id
   })
-  // console.log(transverseCar[0].id)
-  // let categoryList2 = categoryList.filter(function(item,index){
-  //   return index >= 4;
-  // });
   this.setData({
     categoryList1: categoryList1,
-    // categoryList2:categoryList2
   })
 },
 // 获取车联网专区的数据
 getTransverseCarData(){
-  // console.log(this.data.transverseCar_cateId)
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
-    // this.setData({transverseCarList:[res[0]]})
     this.setData({transverseCarList:res})
-    console.log(res)
   })
 },
 //跳转分类列表页面
@@ -138,9 +127,6 @@ goList(e)
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
     this.setData({storelist:res})
   })
-  // wx.navigateTo({
-  //   "url": "/pages/common/list/index?cate_id="+cat_id,
-  // });
 },
   timeFormat(param){//小于10的格式化函数
     return param < 10 ? '0' + param : param; 
@@ -191,16 +177,6 @@ goList(e)
     this.getinfo()
     this.CalculationHeight()
     self = this;
-    // let si = setInterval(() => {
-    //   this.setData({
-    //     page: this.data.page + 1
-    //   }, () => {
-    //     this.storelist()
-    //     if (this.data.page === 5) {
-    //       clearInterval(si)
-    //     }
-    //   })
-    // }, 2000)
     wx.getStorage({
       key: 'noviceShow',
       success(e) {
@@ -267,6 +243,7 @@ goList(e)
   checkoutFenXiang(){
     this.setData({fenXiangShow:!this.data.fenXiangShow})
   },
+  
    //领取优惠券
    get_coupon()
    {
@@ -352,15 +329,9 @@ goList(e)
       }).exec()
     })
     height = res.height
-    // console.log(res)
     this.setData({heightCount:height})
   },
   MonitorNav(event){
-    // var nowTime = new Date();
-    // if (nowTime - this.data.tapTime < 300) {
-    //   return;
-    // }
-    // this.setData({ tapTime: nowTime });
     this.setData({ scrollTop: event.detail.scrollTop})
   },
   onShow: async function () {
@@ -396,7 +367,6 @@ goList(e)
     this.setData({ scrollTop: res.scrollTop })
   },
   onShareAppMessage: function () {
-    console.log(app.globalData)
     return {
       title: `${app.globalData.userInfo.nickName}邀请你成为业务合伙人！`,
       path: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',

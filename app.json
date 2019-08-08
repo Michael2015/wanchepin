@@ -33,10 +33,7 @@
     "pages/common/comments/index",
     "pages/partner/comment/index",
     "pages/partner/personal/feedback/index",
-    "pages/partner/personal/coupon/index",
-    "pages/common/list/index",
-    "pages/partner/personal/data/index",
-    "pages/partner/personal/Explain/index"
+    "pages/partner/personal/coupon/index"
   ],
   "tabBar": {
     "custom": true,
@@ -93,3 +90,5 @@
   },
   "sitemapLocation": "sitemap.json"
 }
+
+

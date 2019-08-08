@@ -1,10 +1,10 @@
 <!--pages/partner/personal/index.wxml-->
 <view>
-<view class="header" bindtap="to" data-url="/pages/partner/personal/data/index">
+<view class="header" bindtap="to" data-url="/pages/partner/personal/partner/index">
   <view>
     <view class="avatar"><image src="{{avatar}}" mode="widthFix"></image></view>
     <view class="info">
-      <view class="name">{{name}} <view class="Grade">{{partner_level}}</view></view>
+      <view class="name">{{name}}</view>
       <view class="num">伙伴{{num}}人</view>
     </view>
     <view class="right">

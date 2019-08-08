@@ -79,6 +79,7 @@ Page({
       this.setData({
         product_rebate_amount: res.profit.product_rebate_amount || null,
         invite_user_count: res.profit.invite_user_count || null,
+        self_buy_count: res.profit.self_buy_count || null,
         coupon_id:res.coupon.data.id,
         coupon_title:res.coupon.data.title,
         coupon_price:res.coupon.data.price,

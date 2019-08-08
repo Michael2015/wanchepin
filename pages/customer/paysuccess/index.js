@@ -14,7 +14,7 @@ Page({
       outnums: e.outnums,
       miandanma: e.platoon_number,
       is_platoon: e.is_platoon // 是否是参加公排的商品
-    })
+    });
   },
   goIndex() {
     if (app.globalData.role === 0)

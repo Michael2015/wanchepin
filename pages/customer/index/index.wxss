@@ -6,7 +6,7 @@ page {
 }
 
 .search_nav {
-    height: 164rpx;
+    height: 118rpx;
 }
 
 .headImg_call image.user_head {
@@ -82,7 +82,7 @@ page {
     word-wrap: break-word;
     word-break: break-all;
     margin-top: -5rpx;
-    height: 91rpx;
+    height: 75rpx;
     line-height: 40rpx;
 }
 
@@ -105,8 +105,8 @@ page {
     width: 44rpx;
     height: 44rpx;
     position: absolute;
-    right: 24rpx;
-    bottom: 60rpx;
+    right: 25rpx;
+    bottom: 9rpx;
 }
 
 .no-data {
@@ -119,18 +119,18 @@ page {
 .commodity_list .commodity_item .coupon
 {
   position: absolute;
-  left: 20rpx;
-  bottom: 180rpx;
+  left: 28rpx;
+  bottom: 175rpx;
 }
 text.coupon3
 {
   color: #e70002;
   background: #fff;  
   display: block;
-  font-size: 25rpx; 
-  width: 120rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  font-size: 20rpx; 
+  width: 110rpx;
+  height: 35rpx;
+  line-height: 35rpx;
   border-radius: 30rpx;
   text-align: center;
   border: 1rpx solid #e70002;
@@ -254,20 +254,20 @@ text.coupon3
   }
 
   .banner{
-    margin-top: 164rpx;
+    margin-top: 118rpx;
   }
   .banner swiper
   {
-    height: 240rpx;
+    height: 300rpx;
   }
   .banner image
   {
     width: 100%;
-    height: 240rpx;
+    height: 300rpx;
   }
   .ding{
     position: fixed;
-    top: 164rpx;
+    top: 118rpx;
     width: 100%;
     z-index: 999;
     height: 66rpx;
@@ -353,10 +353,10 @@ text.coupon3
     margin-top: 20rpx;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 .transverseCar .carTit{
     padding: 10rpx 19rpx;
-    width: 100%;
     font-size: 30rpx;
     color: #333333
 }
@@ -399,8 +399,7 @@ text.coupon3
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-left: 10rpx;
-    padding-right: 20rpx;
+    padding: 0 19rpx;
     font-size: 28rpx;
     position: relative;
     height: 250rpx;
@@ -440,6 +439,7 @@ text.coupon3
     position: absolute;
     right: 0;
     bottom: 0;
+    font-size: 24rpx;
 }
 .item-title .money{
     position: absolute;
@@ -451,7 +451,7 @@ text.coupon3
     font-size: 30rpx;
 }
 .money .secondaryShow{
-    font-size: 20rpx;
+    font-size: 24rpx;
 }
 .transverseCar-coupon{
     position: absolute;

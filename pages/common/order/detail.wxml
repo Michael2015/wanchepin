@@ -51,6 +51,10 @@
                 <view class="col-1">下单时间:</view>
                 <view class="col-2">{{orderInfo.add_time}}</view>
             </view>
+             <view class="row">
+                <view class="col-1">免单方式:</view>
+                <view class="col-2">{{orderInfo.miandan_type}}</view>
+            </view>
             <view class="row">
                 <view class="col-1">物流信息:</view>
                 <view class="col-2">
@@ -74,12 +78,6 @@
                     <block wx:elif="{{orderInfo.status_of_order === 5 && (orderInfo.status == 2 || orderInfo.status == 4)}}">已收货</block>
                     <block wx:elif="{{orderInfo.status_of_order === 5 &&  orderInfo.status == 3}}">已评价</block>
                 </view>
-            </view>
-
-            <!-- 赠品 -->
-            <view class="row">
-                <view class="col-1">赠送产品:</view>
-                <view class="col-2">{{orderInfo.attach_product?orderInfo.attach_product:''}}</view>
             </view>
             <block wx:if="{{orderInfo.status_of_order === 4}}">
                 <view class="row">

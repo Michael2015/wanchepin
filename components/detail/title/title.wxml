@@ -11,7 +11,7 @@
         <view class="msg">下单可享免单</view>
         <view class="msg">推荐购买即可享返利</view>
         <view class="s">
-            <view class="col-1">{{data.attach_product?'赠品：'+data.attach_product:''}}</view>
+            <view class="col-1"></view>
             <view class="col-2" bindtap="openPlatoonPopup" wx:if="{{data.is_platoon == 1}}">免单奖励介绍</view>
         </view>
         <image class="coupon" src="/assets/image/getcoupon.png"  wx:if="{{data.coupon_id}}" bindtap="show_modal"></image>

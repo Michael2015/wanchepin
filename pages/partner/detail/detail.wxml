@@ -4,6 +4,7 @@
         <activity-seckill ref="{{seckill}}" time="{{time_backward[0]}}"></activity-seckill>
         <detail-title data="{{title}}"/>
         <!-- 非虚拟商品并且没有参加公排的不显示任何提示 -->
+        <view style="background:#FFF9AA;color:#717171;text-align:center;font-size:24rpx;line-height:1.7;{{(info.cate_id!=11&&info.is_platoon!=1)?'height:0;overflow:hidden;':''}}">{{!info?' ':(info.cate_id == 11)?'虚拟商品一经售出概不退货':'适用免单奖励计划的商品不适用7天无理由退货'}}</view>
         <detail-tab data="{{tabs}}" activeIndex="{{currentTab}}" bind:change="handleTabChange"/>
         <view class="content-wrap" id="content">
             <swiper
@@ -120,22 +121,22 @@
                         <view class="no-more {{!commentRecordMore? 'no-more-show': ''}}">没有更多评论数据</view>
                     </view>
                 </swiper-item>
+
             </swiper>
         </view>
-        <view style="position: fixed;bottom:108rpx;width:100%;background:#FFF9AA;color:#717171;text-align:center;font-size:24rpx;line-height:1.7;{{(info.cate_id!=11&&info.is_platoon!=1)?'height:0;overflow:hidden;':''}}">{{!info?' ':(info.cate_id == 11)?'虚拟商品一经售出概不退货':'适用免单奖励计划的商品不适用7天无理由退货'}}</view>
         <view class="action-bar">
             <view class="item">
                 <button open-type="share" class="share"></button>
                 <view class="icon icon1"></view>
-                <view class="text">转发客户(推荐赚钱)</view>
+                <view class="text">转发客户</view>
             </view>
             <view class="item" bindtap="goSettlement">
                 <view class="icon icon2"></view>
-                <view class="text">下单(返利{{price.rebate}}元)</view>
+                <view class="text">下单</view>
             </view>
             <view class="item" bindtap="getShareImg">
                 <view class="icon icon3"></view>
-                <view class="text">超级海报(分享赚钱)</view>
+                <view class="text">超级海报</view>
             </view>
         </view>
     </scroll-view>

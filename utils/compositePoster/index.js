@@ -78,7 +78,6 @@ Component({
       ]).then(res => {
         //setTimeout(() => {
         let [qrcode, commodity] = [...res]
-        console.log(commodity.path)
         let ctx = wx.createCanvasContext('posterCanvas')
         ctx.rect(0, 0, 560, 800)
         ctx.setFillStyle('#ffffff')
@@ -88,7 +87,7 @@ Component({
         ctx.setFillStyle('#ffffff')
         height = height > 560 ? 560 : height;
         height = height < 500 ? 560 : height;
-        // console.log(height, '======================')
+        console.log(height, '======================')
         ctx.fillRect(0, height, 560, 241)
         ctx.drawImage(qrcode.path, 339, 600, 163, 163)
         let rectangleTop = height - 44;

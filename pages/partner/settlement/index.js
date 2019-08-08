@@ -14,47 +14,32 @@ Page({
     user_address: '',
     real_name: '',
     phone: '',
-    coupon_id:0,
     coupon_total:0,//包括优惠券和限时秒杀优惠价
-    pay_price:0.00, //实付金额
-    isgetcoupon:false,
+    miandan_type:1,//免单类型,默认是快速免单
   },
   price(product_id) {
-    this.setData({isgetcoupon:false});
     app.http.post('/api/partner/store/price', {
       product_id,
       order_id: this.data.orderId
     }).then(res => {
+      let pay_price = res.price;
+      //优惠券合伙秒杀//优惠券
+      let coupon_total2 = 0.00;
+      if(res.discount.status == 1)
+      {
+        coupon_total2 = res.discount.data.total || res.discount.data.save_money;
+        pay_price =res.discount.data.price ? res.discount.data.price : (pay_price - coupon_total2);
+      }
+      //计算优惠后的价格
       this.setData({
         price: res,
-        info: app.varStorage.get('storeDetail')
+        pay_price:parseFloat(pay_price).toFixed(2),
+        coupon_total:parseFloat(coupon_total2).toFixed(2),
+        info: app.varStorage.get('storeDetail'),
       });
-      this.setData({isgetcoupon:true});
       wx.hideLoading()
     })
   },
-
-  //根据商品ID，获取商品的促销价格，包括优惠券和限时秒杀
-  getCoupon(product_id) {
-      app.http.post('/api/coupon/getProductCoupon', {
-        product_id,
-        order_id:this.data.orderId
-      }).then(res => {
-        let coupon_total = 0.00;
-        let pay_price = this.data.price.price;
-        if(res.status == 1)
-        {
-          coupon_total = res.data.total || res.data.save_money;
-          pay_price = res.data.price ? res.data.price : (this.data.price.price - coupon_total);
-        }
-        this.setData({
-          coupon_id: res.data.id || 0,
-          coupon_total:parseFloat(coupon_total).toFixed(2),
-          pay_price:parseFloat(pay_price).toFixed(2),
-        });
-      })
-  },
-
   pay(order_id, form_id) {
     app.http.get('/api/customer/pay/pay', {
       order_id
@@ -102,23 +87,59 @@ Page({
       wx.hideLoading()
       isDisabled = 1;
     }else if (!this.data.orderId && self.data.product_id && self.data.def_add && self.data.def_add.id) {
-      wx.showLoading({
-        mask: true
-      })
-      app.http.post('/api/order/createOrder', {
-        product_id: self.data.product_id,
-        address_id: self.data.def_add.id,
-        mark: self.data.mark
-      }).then(res => {
-        this.pay(res.order_id, formId)
-        wx.hideLoading()
-        isDisabled = 1;
-      }, () => {
-        isDisabled = 1;
-        self.setData({
-          disabled_loading: false
+       //下单之前让用户选择排队的队列
+       //如果是加入公排，判断加入自购免单还是快速免单
+      if(this.data.info.is_platoon == 1)
+      {
+      this.refs.miandan.show(res => {
+        if (!res) {
+          self.setData({
+            disabled_loading: false
+          })
+          isDisabled = 1;
+          return
+        }
+        //如果是选择自购免单，需要自行处理
+        this.setData({miandan_type:res});
+        wx.showLoading({
+          mask: true
+        });
+        app.http.post('/api/order/createOrder', {
+          product_id: self.data.product_id,
+          address_id: self.data.def_add.id,
+          mark: self.data.mark,
+          miandan_type:self.data.miandan_type
+        }).then(res => {
+          this.pay(res.order_id, formId)
+          wx.hideLoading()
+          isDisabled = 1;
+        }, () => {
+          isDisabled = 1;
+          self.setData({
+            disabled_loading: false
+          })
         })
       })
+      }else{
+        wx.showLoading({
+          mask: true
+        });
+        app.http.post('/api/order/createOrder', {
+          product_id: self.data.product_id,
+          address_id: self.data.def_add.id,
+          mark: self.data.mark,
+          miandan_type:self.data.miandan_type
+        }).then(res => {
+          this.pay(res.order_id, formId)
+          wx.hideLoading()
+          isDisabled = 1;
+        }, () => {
+          isDisabled = 1;
+          self.setData({
+            disabled_loading: false
+          })
+        })
+      }
     } else {
       wx.showToast({
         title: '请添加收货地址',
@@ -200,8 +221,8 @@ Page({
       if (e.order_id) {
         this.setData({is_show_action: 0})
       }
-      this.price(e.id)
-      this.getCoupon(e.id)
+      //this.getCoupon(e.id);
+      this.price(e.id);
     } else
       wx.navigateBack()
   },
