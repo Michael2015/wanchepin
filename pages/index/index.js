@@ -310,10 +310,10 @@ function analysisOptions(options, res) {
     // 分享进来的
     app.globalData.shareInfo.share_user_id = options.s // 推荐人
     app.globalData.shareInfo.share_partner_id = options.p // 店铺 或者 合伙人id
-    app.globalData.shareInfo.share_product_id = options.st || 0// 商品id
+    app.globalData.shareInfo.share_product_id = options.st// 商品id
     console.log('捕获分享入口：')
     console.log(app.globalData.shareInfo)
-    if(app.globalData.shareInfo.share_product_id === 0){
+    if(app.globalData.shareInfo.share_product_id === undefined){
       wx.redirectTo({
         url: '/pages/partner/personal/partner/invite?share_id=' + options.s
       })
