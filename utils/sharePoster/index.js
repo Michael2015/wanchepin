@@ -225,7 +225,7 @@ Component({
         mask: true
       })
       app.http.get('/api/partner.partner/getQrCode', {
-        page: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',
+        page: '/pages/index/index',
         scene: `${props[0].data.uid},${props[0].data.pid}`
       }).then(res => {
         this.createCanvas(res.replace('.', app.globalData.HOST), props[0] ? props[0].data.image : {}, `好友${app.globalData.userInfo.nickName}邀请您成为业务合伙人`)

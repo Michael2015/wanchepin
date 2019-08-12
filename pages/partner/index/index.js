@@ -2,6 +2,8 @@ import sharePoster from '../../../utils/sharePoster/sharePoster.js'
 const app = getApp()
 let text = '';
 let self;
+// 低版本ios scroll-view 初始化时必须充满一屏才能滚动，给个默认高度就能满一屏
+const defaultSwiperHeight = 200
 Page({
   data: {
     storelist: [],
@@ -31,7 +33,9 @@ Page({
     tabTime:'',
     transverseCar_cateId:0,  //车联网专区的分类id
     transverseCarList:[],    //车联网专区显示数据
-    selectClassId:0         //标识选择id
+    selectClassId:0,         //标识选择id
+    tabIndex:0,       //目前切换到的首页tab下标
+    contentSwiperHeight: defaultSwiperHeight,
   },
   getShareImg() {
     sharePoster.createPoster({
@@ -41,6 +45,27 @@ Page({
       })
     })
     this.checkoutFenXiang()
+  },
+   // 初始化内容swiper高度
+    initContentSwiperHeight() {
+    console.log('重新计算高度')
+    let height = 0;
+    let query = wx.createSelectorQuery()
+    const lun = query.select('#item-wrap' + this.data.tabIndex)
+    lun.boundingClientRect().exec(res =>{
+      height = res[0].height
+      if(height < defaultSwiperHeight){
+        height = defaultSwiperHeight
+      }
+      this.setData({contentSwiperHeight:height})
+    })
+    
+  },
+  tabPageChange(event){
+    // console.log(event.detail.current)
+    // console.log(event)
+    this.setData({tabIndex:event.detail.current})
+    this.goList({currentTarget:{dataset:{id:event.detail.currentItemId}}})
   },
   getinfo() {
     app.http.get('/api/partner/home/getinfo').then(res => {
@@ -81,9 +106,17 @@ Page({
       });
       this.data.isAllowLoad = true;
       wx.hideLoading();
+      // setTimeout(() => {
+      //   this.initContentSwiperHeight()
+      // }, 5000);
        //计算秒杀
       //this.countDown();
     })
+  },
+  onReachBottom(){
+    // console.log('1111')
+    this.loadmore()
+    this.initContentSwiperHeight()
   },
   //获取首页banner轮播图
   getBanner()
@@ -114,18 +147,20 @@ async getCategory()
 // 获取车联网专区的数据
 getTransverseCarData(){
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
+    // this.setData({transverseCarList:[res[0],res[1]]})
     this.setData({transverseCarList:res})
   })
 },
 //跳转分类列表页面
 goList(e)
 {
-  let cat_id = e.currentTarget.dataset.id;
+  let cat_id = +e.currentTarget.dataset.id;
   this.setData({
     selectClassId:cat_id
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
     this.setData({storelist:res})
+    this.initContentSwiperHeight()
   })
 },
   timeFormat(param){//小于10的格式化函数
@@ -243,7 +278,6 @@ goList(e)
   checkoutFenXiang(){
     this.setData({fenXiangShow:!this.data.fenXiangShow})
   },
-  
    //领取优惠券
    get_coupon()
    {

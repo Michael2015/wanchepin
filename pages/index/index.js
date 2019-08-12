@@ -27,11 +27,19 @@ Page({
         var arr = scene.split(',')
         // 重写入口参数 二维码带参格式有限制,所以采用这中简短格式
         // 把他当做分享来处理
-        this.data.options = {
-          s: arr[0],
-          p: arr[1],
-          st: arr[2],
-          type: 'share'
+        if(arr.length === 3){
+          this.data.options = {
+            s: arr[0],
+            p: arr[1],
+            st: arr[2],
+            type: 'share'
+          }
+        }else if(arr.length === 2){
+          this.data.options = {
+            s: arr[0],
+            p: arr[1],
+            type: 'share'
+          }
         }
       }
     }
@@ -102,6 +110,8 @@ Page({
           return res
         }).then(page.authPhone).then(page.submitPhone).then((res)=>{
           // 判断入口参数
+          console.log(page.data)
+          console.log(res)
           analysisOptions(page.data.options, res)
           // 不会走到这里来
         }).catch(err => {
@@ -300,9 +310,15 @@ function analysisOptions(options, res) {
     // 分享进来的
     app.globalData.shareInfo.share_user_id = options.s // 推荐人
     app.globalData.shareInfo.share_partner_id = options.p // 店铺 或者 合伙人id
-    app.globalData.shareInfo.share_product_id = options.st // 商品id
+    app.globalData.shareInfo.share_product_id = options.st || 0// 商品id
     console.log('捕获分享入口：')
     console.log(app.globalData.shareInfo)
+    if(app.globalData.shareInfo.share_product_id === 0){
+      wx.redirectTo({
+        url: '/pages/partner/personal/partner/invite?share_id=' + options.s
+      })
+      return
+    }
     wx.redirectTo({
       url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id
     })

@@ -6,7 +6,7 @@
         <!-- 非虚拟商品并且没有参加公排的不显示任何提示 -->
         <view style="background:#FFF9AA;color:#717171;text-align:center;font-size:24rpx;line-height:1.7;{{(info.cate_id!=11&&info.is_platoon!=1)?'height:0;overflow:hidden;':''}}">{{!info?' ':(info.cate_id == 11)?'虚拟商品一经售出概不退货':'适用免单奖励计划的商品不适用7天无理由退货'}}</view>
         <detail-tab data="{{tabs}}" activeIndex="{{currentTab}}" bind:change="handleTabChange"/>
-        <view class="content-wrap" id="content">
+        <view class="content-wrap" id="content">    
             <swiper
                     indicator-dots="{{false}}"
                     autoplay="{{false}}"
