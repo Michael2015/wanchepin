@@ -8,7 +8,8 @@
             <image mode="widthFix" src='/assets/image/closeTip.png' class="{{keyword?'clear_icon show':'clear_icon hide'}}" bindtouchstart="clearText"></image>
             -->
         </view>
-         <button class="share_btn" bindtap="checkoutFenXiang">邀请合伙人</button>
+        <!-- bindtap="checkoutFenXiang" -->
+         <button class="share_btn" open-type="share">邀请合伙人</button>
     </view>
     <view class="countTop">
         <!--  banner 轮播图  -->

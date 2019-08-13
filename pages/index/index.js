@@ -313,15 +313,17 @@ function analysisOptions(options, res) {
     app.globalData.shareInfo.share_product_id = options.st// 商品id
     console.log('捕获分享入口：')
     console.log(app.globalData.shareInfo)
-    if(app.globalData.shareInfo.share_product_id === undefined){
+    if(typeof(app.globalData.shareInfo.share_product_id) === "undefined"){
+      // console.log(typeof(app.globalData.shareInfo.share_product_id) === "undefined")
       wx.redirectTo({
         url: '/pages/partner/personal/partner/invite?share_id=' + options.s
       })
-      return
+    }else{
+      // console.log(typeof(app.globalData.shareInfo.share_product_id) === "undefined")
+      wx.redirectTo({
+        url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id
+      })
     }
-    wx.redirectTo({
-      url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id
-    })
   } else {
     if (res.is_promoter === 0){
       // 客户进入

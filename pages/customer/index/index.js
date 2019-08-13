@@ -1,6 +1,8 @@
 import Contact from '../../../utils/contactUser/contactUser'
 const app = getApp()
 let self;
+// 低版本ios scroll-view 初始化时必须充满一屏才能滚动，给个默认高度就能满一屏
+const defaultSwiperHeight = 200
 Page({
   data: {
     userInfo: {},
@@ -23,7 +25,31 @@ Page({
     scrollTop:0,    //监控滑动距离
     transverseCar_cateId:0,  //车联网专区的分类id
     transverseCarList:[],    //车联网专区显示数据
-    selectClassId:0         //标识选择id
+    selectClassId:0,         //标识选择id
+    tabIndex:0,       //目前切换到的首页tab下标
+    contentSwiperHeight: defaultSwiperHeight,
+  },
+  // 初始化内容swiper高度
+  initContentSwiperHeight() {
+    console.log('重新计算高度')
+    let height = 0;
+    let query = wx.createSelectorQuery()
+    const lun = query.select('#item-wrap' + this.data.tabIndex)
+    lun.boundingClientRect().exec(res =>{
+      height = res[0].height
+      if(height < defaultSwiperHeight){
+        height = defaultSwiperHeight
+      }
+      this.setData({contentSwiperHeight:height})
+    })
+  },
+  onReachBottom(){
+    this.nextPage()
+    this.initContentSwiperHeight()
+  },
+  tabPageChange(event){
+    this.setData({tabIndex:event.detail.current})
+    this.goList({currentTarget:{dataset:{id:event.detail.currentItemId}}})
   },
   getnotice() {
     app.http.get('/api/customer/mall/getnotice').then(res => {
@@ -50,29 +76,30 @@ Page({
   getProductList() {
     const size = this.data.limit; // 默认一页条数
     if (this.data.loading) return // 已经在加载中了
+    console.log('页数：'+this.data.page)
     wx.showLoading({
       title: '加载中',
     })
     this.data.loading = true
-    app.http.get('/api/customer/mall/getProductList', {
-      page: this.data.page,
-      limit:this.data.limit,
-    }).then(res => {
+    // 针对用户进来选择了分类以及没有选择分类时下拉触发所要请求接口不同的处理
+    const apiUrl = this.data.selectClassId === 0?'/api/customer/mall/getProductList':'/api/marketing/getCategoryProducts'
+    const httpObj = this.data.selectClassId === 0?{page: this.data.page,limit: this.data.limit}:{cate_id:this.data.selectClassId}
+    app.http.get(apiUrl,httpObj).then(res => {
       let getProductList = this.data.getProductList.concat(res)
       this.setData({
         getProductList
-      }, () => {
-        wx.hideLoading()
-        this.data.loading = false
-        if (res && res.length < size) {
-          this.setData({
-            loaded: true
-          })
-        } else {
-          this.data.page++
-        }
       })
+      wx.hideLoading()
+      this.data.loading = false
+      if (res && res.length < size) {
+        this.setData({
+          loaded: true
+        })
+      } else {
+        this.data.page++
+      }
     })
+    wx.hideLoading();
   },
 
   show_modal(e)
@@ -150,6 +177,7 @@ Page({
     })
   },
   nextPage() {
+    console.log('loaded'+this.data.loaded)
     if (!this.data.loaded) { // 没有到最后一页
       this.getProductList()
     }
@@ -263,12 +291,13 @@ Page({
   //跳转分类列表页面
 goList(e)
 {
-  let cat_id = e.currentTarget.dataset.id;
+  let cat_id = +e.currentTarget.dataset.id;
   this.setData({
     selectClassId:cat_id
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
-    this.setData({getProductList:res})
+    this.setData({getProductList:res,loaded:true})
+    this.initContentSwiperHeight()
   })
   // wx.navigateTo({
   //   "url": "/pages/common/list/index?cate_id="+cat_id,

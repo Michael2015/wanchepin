@@ -113,6 +113,7 @@ Page({
       //this.countDown();
     })
   },
+  // 监控当前页面触底事件
   onReachBottom(){
     // console.log('1111')
     this.loadmore()
@@ -159,7 +160,7 @@ goList(e)
     selectClassId:cat_id
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
-    this.setData({storelist:res})
+    this.setData({storelist:res,isLoad:1})
     this.initContentSwiperHeight()
   })
 },
