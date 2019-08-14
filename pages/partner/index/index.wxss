@@ -89,27 +89,25 @@ page {
   padding: 10rpx 0;
   overflow: hidden;
 }
-/* .transverseCarItem-one .Sale{
+.transverseCarItem-one .item-title{
   margin-right: 20rpx;
-} */
+}
 .item-img{
-  margin: 0 19rpx;
   border-radius: 15rpx;
   width: 250rpx;
   height: 250rpx;
 }
 .item-title{
-  /* border:1rpx solid blue; */
-  /* width: 480rpx; */
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding-right: 19rpx;
   font-size: 28rpx;
   position: relative;
   height: 250rpx;
   text-align: justify;
-  /* width: 275rpx; */
+}
+.transverseCarItem:last-child .item-title{
+  padding-right: 19rpx;
 }
 .top{
   width: 100%;
@@ -236,6 +234,7 @@ page {
 }
 .transverseCar-showImg{
   position: relativel;
+  padding:0 19rpx;
 }
 .transverseCar-Free-sheet{
   position: absolute;

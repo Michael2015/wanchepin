@@ -266,7 +266,7 @@ Page({
   // 获取车联网专区的数据
   getTransverseCarData(){
     app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
-      // this.setData({transverseCarList:[res[0],res[1]]})
+      // this.setData({transverseCarList:[res[0]]})
       this.setData({transverseCarList:res})
     })
   },
