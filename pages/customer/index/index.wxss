@@ -81,7 +81,6 @@ page {
     -webkit-box-orient: vertical;
     word-wrap: break-word;
     word-break: break-all;
-    margin-top: -5rpx;
     height: 75rpx;
     line-height: 40rpx;
 }
