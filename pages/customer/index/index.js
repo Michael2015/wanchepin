@@ -28,6 +28,7 @@ Page({
     selectClassId:0,         //标识选择id
     tabIndex:0,       //目前切换到的首页tab下标
     contentSwiperHeight: defaultSwiperHeight,
+    isloading:false    //标识切换页是否处于加载状态
   },
   // 初始化内容swiper高度
   initContentSwiperHeight() {
@@ -48,8 +49,7 @@ Page({
     this.initContentSwiperHeight()
   },
   tabPageChange(event){
-    this.setData({tabIndex:event.detail.current})
-    this.goList({currentTarget:{dataset:{id:event.detail.currentItemId}}})
+    this.goList({currentTarget:{dataset:{id:event.detail.currentItemId,index:event.detail.current}}})
   },
   getnotice() {
     app.http.get('/api/customer/mall/getnotice').then(res => {
@@ -292,11 +292,14 @@ Page({
 goList(e)
 {
   let cat_id = +e.currentTarget.dataset.id;
+  let tab_id = +e.currentTarget.dataset.index;
   this.setData({
-    selectClassId:cat_id
+    tabIndex:tab_id,
+    selectClassId:cat_id,
+    isloading:true
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
-    this.setData({getProductList:res,loaded:true})
+    this.setData({getProductList:res,loaded:true,isloading:false})
     this.initContentSwiperHeight()
   })
   // wx.navigateTo({

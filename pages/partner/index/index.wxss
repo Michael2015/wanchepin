@@ -93,7 +93,7 @@ page {
   margin-right: 20rpx;
 } */
 .item-img{
-  margin-left: 10rpx;
+  margin: 0 19rpx;
   border-radius: 15rpx;
   width: 250rpx;
   height: 250rpx;
@@ -104,7 +104,7 @@ page {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 0 19rpx;
+  padding-right: 19rpx;
   font-size: 28rpx;
   position: relative;
   height: 250rpx;
@@ -239,7 +239,7 @@ page {
 }
 .transverseCar-Free-sheet{
   position: absolute;
-  right: 340rpx;
+  right: 333rpx;
   top: 0;
   font-size: 20rpx;
   background: #e70002;
@@ -249,7 +249,7 @@ page {
 }
 .transverseCar-Free-sheet-one{
   position: absolute;
-  right: 490rpx;
+  right: 483rpx;
   top: 0;
   font-size: 20rpx;
   background: #e70002;
@@ -269,8 +269,8 @@ page {
 }
 .transverseCar-coupon{
   position: absolute;
-  left: 0;
-  bottom: 10rpx;
+  left: 19rpx;
+  bottom: 22rpx;
 }
 .commodity_list .commodity_item .coupon
 {

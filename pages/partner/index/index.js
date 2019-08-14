@@ -36,6 +36,7 @@ Page({
     selectClassId:0,         //标识选择id
     tabIndex:0,       //目前切换到的首页tab下标
     contentSwiperHeight: defaultSwiperHeight,
+    isloading:false    //标识切换页是否处于加载状态
   },
   getShareImg() {
     sharePoster.createPoster({
@@ -62,10 +63,7 @@ Page({
     
   },
   tabPageChange(event){
-    // console.log(event.detail.current)
-    // console.log(event)
-    this.setData({tabIndex:event.detail.current})
-    this.goList({currentTarget:{dataset:{id:event.detail.currentItemId}}})
+    this.goList({currentTarget:{dataset:{id:event.detail.currentItemId,index:event.detail.current}}})
   },
   getinfo() {
     app.http.get('/api/partner/home/getinfo').then(res => {
@@ -148,7 +146,7 @@ async getCategory()
 // 获取车联网专区的数据
 getTransverseCarData(){
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
-    // this.setData({transverseCarList:[res[0],res[1]]})
+    // this.setData({transverseCarList:[res[0]]})
     this.setData({transverseCarList:res})
   })
 },
@@ -156,11 +154,14 @@ getTransverseCarData(){
 goList(e)
 {
   let cat_id = +e.currentTarget.dataset.id;
+  let tab_id = +e.currentTarget.dataset.index;
   this.setData({
-    selectClassId:cat_id
+    tabIndex:tab_id,
+    selectClassId:cat_id,
+    isloading:true
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
-    this.setData({storelist:res,isLoad:1})
+    this.setData({storelist:res,isLoad:1,isloading:false})
     this.initContentSwiperHeight()
   })
 },

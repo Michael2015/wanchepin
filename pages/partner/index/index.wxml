@@ -95,7 +95,7 @@
     <view class="btn-area-nav">
         <view class="{{scrollTop >= heightCount?'ding':'category'}}">
             <!-- <button class="active">首页</button> -->
-            <button wx:for="{{categoryList1}}" class="{{selectClassId===item.id?'active':''}}" wx:key="item" bindtap="goList" data-id="{{item.id}}">{{item.cate_name}}</button>
+            <button wx:for="{{categoryList1}}" class="{{selectClassId===item.id?'active':''}}" wx:key="item" bindtap="goList" data-id="{{item.id}}" data-index="{{index}}">{{item.cate_name}}</button>
             <!-- <button bindtap="showCategory"><span><image src="/assets/image/menu_category.png"></image> 更多</span></button> -->
         </view>
          <!-- <view class="more" wx:if="{{isShowCategory}}">
@@ -129,11 +129,11 @@
             duration="500"
             class="content-swiper"
             bindchange="tabPageChange"
-            current="{{currentTab}}"
+            current="{{tabIndex}}"
             style="height: {{contentSwiperHeight}}px"
         >
             <swiper-item class="content-swiper-item" wx:for="{{categoryList1}}" wx:key="index" item-id="{{item.id}}">
-                <view id="{{'item-wrap'+index}}">
+                <view id="{{'item-wrap'+index}}" wx:if="{{tabIndex === index && !isloading}}">
                     <view wx:if="{{scrollTop >= heightCount}}" style="height:66rpx;width:100%"></view>
                     <view class="commodity_showList">
                             <view class="commodity_item" wx:for="{{storelist}}" wx:key="{{index}}">
