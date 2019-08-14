@@ -4,23 +4,15 @@
   font-size: 24rpx;
   text-align: center;
   padding: 32rpx 0;
-  /* position: relative; */
+  position: relative;
 }
-.no-data-Zero{
-  color:#999;
-  font-size: 24rpx;
-  text-align: center;
-  padding: 32rpx 0;
-  /* position: relative; */
-  /* margin-top: -338rpx; */
-}
-.no-data-Zero .no-data-image{
+.no-data .no-data-image{
   margin: auto;
   display: block;
   width: 200rpx;
   height: 200rpx;
 }
-.no-data-Zero text{
+.no-data text{
   display: block;
   margin-top: 50rpx;
 }

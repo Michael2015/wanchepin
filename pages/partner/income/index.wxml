@@ -36,7 +36,9 @@
                 <text> | </text>
                 <text wx:if="{{item.coupon_price}}">已优惠金额：{{item.coupon_price}}</text>
               </view>
-              <view class="right">
+            </view>
+            <view class="footer" wx:if="{{item.left}}">
+             <view class="left">
                 <text class="light">{{item.left}}</text>
               </view>
             </view>

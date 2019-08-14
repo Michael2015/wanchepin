@@ -220,13 +220,13 @@ Component({
       })
     },
     createPoster(props) {
-      console.log(props)
       wx.showLoading({
         mask: true
       })
       app.http.get('/api/partner.partner/getQrCode', {
-        page: '/pages/index/index',
-        scene: `${props[0].data.uid},${props[0].data.pid}`
+        page: 'pages/index/index',
+        //-1 为了让后台重新生成二维码，不要取
+        scene: `${props[0].data.uid},0,0,-4`
       }).then(res => {
         this.createCanvas(res.replace('.', app.globalData.HOST), props[0] ? props[0].data.image : {}, `好友${app.globalData.userInfo.nickName}邀请您成为业务合伙人`)
       })

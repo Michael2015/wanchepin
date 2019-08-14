@@ -1,6 +1,6 @@
 <!--components/no-data/index.wxml-->
 <view class="no-data" wx:if="{{list.length > 0}}">没有更多数据了</view>
-<view class="no-data-Zero" wx:else>
+<view class="no-data" wx:else>
     <image class="no-data-image" src='/assets/image/kong.png'></image>
     <text>当前列下暂无商品，敬请期待</text>
 </view>

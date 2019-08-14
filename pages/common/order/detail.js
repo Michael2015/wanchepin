@@ -70,7 +70,7 @@ Page({
           //   delta: 1
           // })
           wx.showModal({
-            content: '确认收货成功',
+            content: '收货成功',
             showCancel: false,
             success: res => {
               // 刷新当前页面
@@ -88,7 +88,7 @@ Page({
     // 不参加公排的商品的收货
     wx.showModal({
       title: '提示',
-      content: '确定确认收货吗?',
+      content: '您确定已收到货吗?',
       success: res => {
         if (res.confirm) {
           wx.showLoading()
@@ -101,7 +101,7 @@ Page({
             //   delta: 1
             // })
             wx.showModal({
-              content: '确认收货成功',
+              content: '收货成功',
               showCancel: false,
               success: res => {
                 // 刷新当前页面
@@ -134,10 +134,6 @@ Page({
               content: '退款成功',
               showCancel: false,
               success: res => {
-                // wx.navigateBack({
-                //   delta: 1
-                // })
-                // 刷新当前页面
                 this.getDetail()
                 app.varStorage.del('orderListKeepalive')
               }

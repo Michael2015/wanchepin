@@ -15,7 +15,7 @@ Page({
     real_name: '',
     phone: '',
     coupon_total:0,//包括优惠券和限时秒杀优惠价
-    miandan_type:1,//免单类型,默认是快速免单
+    miandan_type:0,//免单类型,默认是无免单
   },
   price(product_id) {
     app.http.post('/api/partner/store/price', {
@@ -89,7 +89,7 @@ Page({
     }else if (!this.data.orderId && self.data.product_id && self.data.def_add && self.data.def_add.id) {
        //下单之前让用户选择排队的队列
        //如果是加入公排，判断加入自购免单还是快速免单
-      if(this.data.info.is_platoon == 1)
+      if(this.data.info.is_platoon == 1 && this.data.info.is_self_buy_platoon == 1)
       {
       this.refs.miandan.show(res => {
         if (!res) {
@@ -121,6 +121,11 @@ Page({
         })
       })
       }else{
+        //判断是否有快速免单
+        if(this.data.info.is_platoon == 1)
+        {
+           this.setData({miandan_type:1});
+        }
         wx.showLoading({
           mask: true
         });

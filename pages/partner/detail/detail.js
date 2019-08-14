@@ -58,7 +58,7 @@ Page({
   onLoad: function (options) {
     self = this;
     this.setData({
-      id: options.id || 1, // 获取商品id
+      id: options.id || 2, // 获取商品id
       seckill:'',
       info: app.varStorage.get('storeDetail')
     })

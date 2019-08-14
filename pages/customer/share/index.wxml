@@ -8,7 +8,7 @@
         <view class="title">{{info.store_name}}</view>
         <view class="desc0" wx:if="{{product_rebate_amount}}">返利金额<text class="red">{{product_rebate_amount}}元</text></view>
         <view class="desc1 red" wx:if="{{invite_user_count}}"><image src="../../../assets/image/jth.png" mode="aspectFit"></image><text>您购买的此商品已经进入快速免单排队，再邀请{{invite_user_count}}人即可免单。</text></view>
-        <view class="desc1 red" wx:if="{{self_buy_count}}"><image src="../../../assets/image/jth.png" mode="aspectFit"></image><text>您购买的此商品已经进入自购免单排队，再购买{{invite_user_count}}件商品即可免单。</text></view>
+        <view class="desc1 red" wx:if="{{self_buy_count}}"><image src="../../../assets/image/jth.png" mode="aspectFit"></image><text>您购买的此商品已经进入自购免单排队，再购买{{self_buy_count}}件商品即可免单。</text></view>
     </view>
     <view class="line"></view>
     <view class="btnView">

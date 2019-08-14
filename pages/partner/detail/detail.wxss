@@ -400,6 +400,8 @@ scroll-view{
   height: auto;
   display: block;
   margin-bottom: 30rpx;
+  background:transparent;
+  border-radius:0;
 }
 .comment-record .item .col .s .avatar-image
 {

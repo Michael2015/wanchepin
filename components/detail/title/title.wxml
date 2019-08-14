@@ -1,6 +1,9 @@
    <view class="title-wrap">
     <view class="content">
-        <view class="title">{{data.title}}</view>
+        <view class="title">
+        {{data.title}}
+        <image class="coupon" src="/assets/image/getcoupon2.png"  wx:if="{{data.coupon_id}}" bindtap="show_modal"></image>
+        </view>
         <view class="p">
         <em wx:if="{{data.seckill.status == 0 || data.seckill.status == -1}}">￥{{data.price}}</em>
         <em wx:if="{{data.seckill.status == 1}}">
@@ -8,13 +11,13 @@
             <em class="text-u">￥{{data.price}}</em>
         </em> 
         <view class="col-1">{{data.sale}}份已售</view></view>
-        <view class="msg">下单可享免单</view>
-        <view class="msg">推荐购买即可享返利</view>
+        <view class="msg" wx:if="{{data.is_platoon}}">下单即可享免单</view>
+        <view class="msg" wx:if="{{data.is_platoon}}">合伙人推荐购买即可享返利</view>
         <view class="s">
             <view class="col-1"></view>
             <view class="col-2" bindtap="openPlatoonPopup" wx:if="{{data.is_platoon == 1}}">免单奖励介绍</view>
         </view>
-        <image class="coupon" src="/assets/image/getcoupon.png"  wx:if="{{data.coupon_id}}" bindtap="show_modal"></image>
+        
     </view>
     <view class="popup-platoon" wx:if="{{showPlatoonPopup}}">
         <view class="mask" bindtap="closePlatoonPopup"></view>
