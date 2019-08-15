@@ -44,7 +44,16 @@ page{
 }
 .info .name{
   font-size: 32rpx;
-  font-weight: 800;
+  /* font-weight: 800; */
+}
+.info .name text{
+  font-size: 28rpx;
+  /* font-weight: 800; */
+  background: rgba(255, 255, 255, 0.2953);
+  border-radius:8rpx;
+  margin-left: 30rpx;
+  padding: 5rpx 20rpx;
+  color:#fff;
 }
 .info .num{
   font-size: 24rpx;

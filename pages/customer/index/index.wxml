@@ -102,7 +102,7 @@
         </view>
     <!--  banner 轮播图  -->
     <scroll-view scroll-y class="commodity_list" bindscrolltolower="nextPage">
-        <swiper
+        <!-- <swiper
             indicator-dots="{{false}}"
             autoplay="{{false}}"
             interval="5000"
@@ -111,9 +111,9 @@
             bindchange="tabPageChange"
             current="{{tabIndex}}"
             style="height: {{contentSwiperHeight}}px"
-        >
-            <swiper-item class="content-swiper-item" wx:for="{{categoryList1}}" wx:key="index" item-id="{{item.id}}">
-                <view id="{{'item-wrap'+index}}"  wx:if="{{tabIndex === index && !isloading}}" >
+        > -->
+            <!-- <swiper-item class="content-swiper-item" wx:for="{{categoryList1}}" wx:key="index" item-id="{{item.id}}"> -->
+                <!-- <view id="{{'item-wrap'+index}}"  wx:if="{{tabIndex === index && !isloading}}" > -->
                     <view wx:if="{{scrollTop >= heightCount}}" style="height:66rpx;width:100%"></view>
                     <view class="commodity_showList">
                         <view class="commodity_item" wx:for="{{getProductList}}" wx:key="{{index}}">
@@ -149,11 +149,11 @@
                         </view>
                         <view class="Replace" wx:if="{{getProductList.length % 2 ===1}}"></view>
                     </view>
-                    <no-data list="{{getProductList}}" wx:if="{{getProductList&&getProductList.length===0}}"></no-data>
-                </view>
-            </swiper-item>
-        </swiper>
-        <no-data list="{{getProductList}}" wx:if="{{getProductList&&getProductList.length!==0}}"></no-data>
+                    <!-- <no-data list="{{getProductList}}" wx:if="{{getProductList&&getProductList.length===0}}"></no-data> -->
+                <!-- </view> -->
+            <!-- </swiper-item> -->
+        <!-- </swiper> -->
+        <no-data list="{{getProductList}}" wx:if="(getProductList&&getProductList.length!==0)||isload"></no-data>
         <view style="height:70px"></view>
     </scroll-view>
     <contact-user id="contact-view"></contact-user>

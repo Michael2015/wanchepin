@@ -46,7 +46,7 @@ Page({
   },
   onReachBottom(){
     this.nextPage()
-    this.initContentSwiperHeight()
+    // this.initContentSwiperHeight()
   },
   tabPageChange(event){
     this.goList({currentTarget:{dataset:{id:event.detail.currentItemId,index:event.detail.current}}})
@@ -300,7 +300,7 @@ goList(e)
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
     this.setData({getProductList:res,loaded:true,isloading:false})
-    this.initContentSwiperHeight()
+    // this.initContentSwiperHeight()
   })
   // wx.navigateTo({
   //   "url": "/pages/common/list/index?cate_id="+cat_id,

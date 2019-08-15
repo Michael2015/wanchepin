@@ -115,7 +115,7 @@ Page({
   onReachBottom(){
     // console.log('1111')
     this.loadmore()
-    this.initContentSwiperHeight()
+    // this.initContentSwiperHeight()
   },
   //获取首页banner轮播图
   getBanner()
@@ -162,7 +162,7 @@ goList(e)
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
     this.setData({storelist:res,isLoad:1,isloading:false})
-    this.initContentSwiperHeight()
+    // this.initContentSwiperHeight()
   })
 },
   timeFormat(param){//小于10的格式化函数

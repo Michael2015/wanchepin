@@ -122,7 +122,7 @@
     </view> -->
     
         <!--  活动专区 -->
-        <swiper
+        <!-- <swiper
             indicator-dots="{{false}}"
             autoplay="{{false}}"
             interval="5000"
@@ -131,9 +131,9 @@
             bindchange="tabPageChange"
             current="{{tabIndex}}"
             style="height: {{contentSwiperHeight}}px"
-        >
-            <swiper-item class="content-swiper-item" wx:for="{{categoryList1}}" wx:key="index" item-id="{{item.id}}">
-                <view id="{{'item-wrap'+index}}" wx:if="{{tabIndex === index && !isloading}}">
+        > -->
+            <!-- <swiper-item class="content-swiper-item" wx:for="{{categoryList1}}" wx:key="index" item-id="{{item.id}}"> -->
+                <!-- <view id="{{'item-wrap'+index}}" wx:if="{{tabIndex === index && !isloading}}"> -->
                     <view wx:if="{{scrollTop >= heightCount}}" style="height:66rpx;width:100%"></view>
                     <view class="commodity_showList">
                             <view class="commodity_item" wx:for="{{storelist}}" wx:key="{{index}}">
@@ -169,11 +169,11 @@
                             </view>
                             <view class="Replace" wx:if="{{storelist.length % 2 ===1}}"></view>
                     </view>
-                    <no-data list="{{storelist}}" wx:if="{{storelist&&storelist.length===0}}"></no-data>
-                </view>
-            </swiper-item>
-        </swiper>
-        <no-data list="{{storelist}}" wx:if="{{storelist&&storelist.length!==0}}"></no-data>
+                    <!-- <no-data list="{{storelist}}" wx:if="{{storelist&&storelist.length===0}}"></no-data> -->
+                <!-- </view> -->
+            <!-- </swiper-item> -->
+        <!-- </swiper> -->
+        <no-data list="{{storelist}}" wx:if="(storelist&&storelist.length!==0)||isload"></no-data>
         <view style="height:50px"></view>
     </scroll-view>
     <image src="/assets/image/seeTutorial.png" mode="widthFix" class="seeTutorial" catchtap="goHelperAll"></image>
