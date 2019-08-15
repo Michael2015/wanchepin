@@ -118,8 +118,8 @@ page {
 .commodity_list .commodity_item .coupon
 {
   position: absolute;
-  left: 28rpx;
-  bottom: 175rpx;
+  left: 23rpx;
+  bottom: 168rpx;
 }
 text.coupon3
 {
@@ -132,7 +132,7 @@ text.coupon3
   line-height: 35rpx;
   border-radius: 30rpx;
   text-align: center;
-  border: 1rpx solid #e70002;
+  border: 1rpx solid #999;
 }
 .btn-area-nav .ding button{
   background:#E60000;

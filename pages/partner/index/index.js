@@ -104,18 +104,11 @@ Page({
       });
       this.data.isAllowLoad = true;
       wx.hideLoading();
-      // setTimeout(() => {
-      //   this.initContentSwiperHeight()
-      // }, 5000);
-       //计算秒杀
-      //this.countDown();
     })
   },
   // 监控当前页面触底事件
   onReachBottom(){
-    // console.log('1111')
     this.loadmore()
-    // this.initContentSwiperHeight()
   },
   //获取首页banner轮播图
   getBanner()
@@ -146,7 +139,6 @@ async getCategory()
 // 获取车联网专区的数据
 getTransverseCarData(){
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
-    // this.setData({transverseCarList:[res[0]]})
     this.setData({transverseCarList:res})
   })
 },
@@ -162,7 +154,6 @@ goList(e)
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
     this.setData({storelist:res,isLoad:1,isloading:false})
-    // this.initContentSwiperHeight()
   })
 },
   timeFormat(param){//小于10的格式化函数
@@ -324,14 +315,6 @@ goList(e)
 
     }
     this.data.isAllowLoad2 = true;
-  },
-  searchCommodity() {
-    // this.setData({
-    //   page: 1,
-    //   storelist: []
-    // }, () => {
-    //   this.storelist()
-    // })
   },
   clearText() {
     this.setData({

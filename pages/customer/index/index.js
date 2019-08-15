@@ -46,7 +46,6 @@ Page({
   },
   onReachBottom(){
     this.nextPage()
-    // this.initContentSwiperHeight()
   },
   tabPageChange(event){
     this.goList({currentTarget:{dataset:{id:event.detail.currentItemId,index:event.detail.current}}})
@@ -56,7 +55,6 @@ Page({
       this.setData({
         getnotice: res
       })
-      // this.getProductList()
       this.getPartnerInfo()
     })
   },
@@ -245,28 +243,19 @@ Page({
     let categoryList1 = categoryList.filter(function(item,index){
       return index != 0;
     });
-    // this.setData({
-    //   selectClassId:categoryList1[0].id
-    // })
     let transverseCar = categoryList.filter(function(item,index){
       return index === 0
     })
     this.setData({
       transverseCar_cateId:transverseCar[0].id
     })
-    // console.log(transverseCar[0].id)
-    // let categoryList2 = categoryList.filter(function(item,index){
-    //   return index >= 4;
-    // });
     this.setData({
       categoryList1: categoryList1,
-      // categoryList2:categoryList2
     })
   },
   // 获取车联网专区的数据
   getTransverseCarData(){
     app.http.post('/api/marketing/getCategoryProducts',{cate_id :this.data.transverseCar_cateId}).then(res =>{
-      // this.setData({transverseCarList:[res[0],res[1]]})
       this.setData({transverseCarList:res})
     })
   },
@@ -300,11 +289,7 @@ goList(e)
   })
   app.http.post('/api/marketing/getCategoryProducts',{cate_id :cat_id}).then(res =>{
     this.setData({getProductList:res,loaded:true,isloading:false})
-    // this.initContentSwiperHeight()
   })
-  // wx.navigateTo({
-  //   "url": "/pages/common/list/index?cate_id="+cat_id,
-  // });
 },
   touchMove() {
     return

@@ -7,6 +7,10 @@ Component({
     list: {
       type: Array,
       value: []
+    },
+    isLoad:{
+       type: Number,
+      value: ''
     }
   },
 

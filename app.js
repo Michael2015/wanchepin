@@ -95,7 +95,6 @@ App({
     role: null, 
     //HOST: 'https://wcp.szyrwl.com',
     HOST: 'https://storemp.golodata.com',
-    // HOST: 'http://storemp.golodev.cn',
     shareInfo: {},
     tabInst: []
   }
