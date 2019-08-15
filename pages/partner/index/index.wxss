@@ -210,7 +210,7 @@ page {
 {
   color: #e70002;
   font-weight: bold;
-  font-size: 30rpx;
+  font-size: 27rpx;
 }
 .commodity_list .commodity_item .volume .bold .Supporting
 {
