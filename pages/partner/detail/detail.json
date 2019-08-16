@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "商品详情",
+  "navigationBarBackgroundColor": "#E60000",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "detail-swiper": "/components/detail/swiper/swiper",
     "detail-title": "/components/detail/title/title",
