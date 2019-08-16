@@ -33,7 +33,8 @@
     "pages/common/comments/index",
     "pages/partner/comment/index",
     "pages/partner/personal/feedback/index",
-    "pages/partner/personal/coupon/index"
+    "pages/partner/personal/coupon/index",
+    "pages/partner/personal/data/index"
   ],
   "tabBar": {
     "custom": true,

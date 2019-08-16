@@ -3,9 +3,9 @@
   <view class="warp">
     <view class="warp-item">
       <view class="item-title avatar-title">头像</view>
-      <view class="item-content">
+      <!-- <view class="item-content"> -->
         <image src="{{avatar}}" class="avatar" mode="widthFix"></image>
-      </view>
+      <!-- </view> -->
     </view>
     <view class="warp-item">
       <view class="item-title">名字</view>
@@ -13,7 +13,7 @@
     </view>
     <view class="warp-item">
       <view class="item-title">合伙人等级
-        <image src="/assets/image/question.png" class="question" bindtap="to" data-url="/pages/partner/personal/Explain/index" mode="widthFix"></image>
+        <!-- <image src="/assets/image/question.png" class="question" bindtap="to" data-url="/pages/partner/personal/Explain/index" mode="widthFix"></image> -->
       </view>
       <view class="item-content">{{partner_level}}</view>
     </view>
@@ -33,11 +33,24 @@
   </view>
   <view class="mask" wx:if="{{showMask}}">
     <view class="phone-warp">
-      <view class="input-warp"><input class="phone-input" placeholder="请输入11位手机号" data-phone="{{inputPhone}}" bindinput="Transfusion" maxlength="11"></input></view>
-      <view class="button-warp">
-        <button class="tabMask tabMaskR" bindtap="tabMask">取消</button>
-        <button class="tabMask" wx:if="{{inputPhone.length === 0 || inputPhone.length !== 11}}" disabled>下一步</button>
-        <button bindtap="next" class="tabMask" wx:else>下一步</button>
+      <view class="form-model" wx:if="{{!findTeam}}">
+        <view class="title-warp">请输入11位手机号</view>
+        <view class="input-warp"><input class="phone-input" placeholder="" data-phone="{{inputPhone}}" bindinput="Transfusion" maxlength="11"></input></view>
+        <view class="button-warp">
+          <!-- <button class="tabMask tabMaskR" bindtap="tabMask">取消</button> -->
+          <button class="tabMask" wx:if="{{inputPhone.length === 0 || inputPhone.length !== 11}}" disabled>下一步</button>
+          <button bindtap="next" class="tabMask" wx:else>下一步</button>
+        </view>
+      </view>
+      <view class="confirm-model" wx:if="{{findTeam}}">
+        <view class="confirm-title">是否确定加入{{inputName}}的团队？</view>
+        <view class="button-warp">
+          <button class="ChoiceBut no" bindtap="no">否</button>
+          <button class="ChoiceBut yes" bindtap="yes">是</button>
+        </view>
+      </view>
+      <view class="clone" bindtap="tabMask">
+        <image src="/assets/image/close.png"></image>
       </view>
     </view>
   </view>

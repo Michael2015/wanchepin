@@ -18,7 +18,8 @@ Page({
     showMask:false,
     inputPhone:"",
     inputName:"",
-    addTeamId:null //要加入团队id
+    addTeamId:null, //要加入团队id
+    findTeam:false  //是否查询到有效团队
   },
 
   /**
@@ -63,7 +64,7 @@ Page({
   },
   //切换显示mask
   tabMask(){
-    this.setData({ showMask: !this.data.showMask })
+    this.setData({ showMask: !this.data.showMask,findTeam: false })
   },
   //添加团队
   addTeam(){
@@ -85,37 +86,22 @@ Page({
       })
       return
     }
-    this.setData({inputName:res.nickname,addTeamId:res.uid})
-    var that = this;
-    wx.showModal({
-      title: '提示',
-      content: `是否确定加入${this.data.inputName}的团队？`,
-      success: async (res) =>{
-        if (res.confirm) {
-          // 加入成功
-          const res = await app.http.post('/api/partner.index/joinTeam',{spid:this.data.addTeamId})
-          console.log(res)
-          console.log(that.data.addTeamId)
-          wx.showToast({
-            title:'加入成功',
-          })
-          this.setData({
-            is_band_partner:1,  //标识是否有上级合伙人
-            spread_user_phone: res.phone,
-            spread_user_nickname: res.nickname,
-          })
-          that.tabMask()
-          // 加入失败
-          // wx.showToast({
-          //   icon:'none',
-          //   title:'加入失败，请稍后再试',
-          //   image:'/assets/image/red_close.png'
-          // })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
+    this.setData({inputName:res.nickname,addTeamId:res.uid,findTeam:true})
+  },
+  async yes(){
+    const res = await app.http.post('/api/partner.index/joinTeam',{spid:this.data.addTeamId})
+    wx.showToast({
+      title:'加入成功',
     })
+    this.setData({
+      is_band_partner:1,  //标识是否有上级合伙人
+      spread_user_phone: res.phone,
+      spread_user_nickname: res.nickname,
+    })
+    this.tabMask()
+  },
+  no(){
+    this.setData({findTeam:false})
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

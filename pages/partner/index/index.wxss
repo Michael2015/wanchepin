@@ -28,8 +28,8 @@ page {
   /* align-items: center */
 }
 .Replace{
-  width: 45%;
   background: rgba(0, 0, 0, 0);
+  width: 50%;
 }
 .lunImg{
   width: 30rpx;

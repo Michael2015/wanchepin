@@ -155,8 +155,8 @@ text.coupon3
   border-radius: 0;
 }
 .Replace{
-    width: 45%;
     background: rgba(0, 0, 0, 0);
+    width: 50%;
 }
 .Free-sheet{
     position: absolute;
