@@ -78,14 +78,6 @@ Page({
   //下一步
   async next(){
     var res = await app.http.post('/api/partner/partner/searchPartner',{phone:this.data.inputPhone})
-    if(res.nickname === undefined){
-      wx.showToast({
-        icon:'none',
-        title:'用户不存在，请修改后再试',
-        image:'/assets/image/red_close.png'
-      })
-      return
-    }
     this.setData({inputName:res.nickname,addTeamId:res.uid,findTeam:true})
   },
   async yes(){
