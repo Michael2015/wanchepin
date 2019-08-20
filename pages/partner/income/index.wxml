@@ -43,7 +43,7 @@
               </view>
             </view>
           </view>
-          <no-data list="{{list}}" wx:if="{{(list&&list.length===0) || loaded}}"></no-data>
+          <no-data list="{{list}}" isLoad="{{loaded}}" wx:if="{{(list&&list.length===0) || loaded}}"></no-data>
         </view>
       </scroll-view>
     </swiper-item>
@@ -60,7 +60,7 @@
               {{item.pm?'+':'-'}}  {{item.number}}
             </view>
           </view>
-          <no-data list="{{list1}}" wx:if="{{(list1&&list1.length===0) || loaded1}}"></no-data>
+          <no-data list="{{list1}}" isLoad="{{loaded1}}" wx:if="{{(list1&&list1.length===0) || loaded1}}"></no-data>
         </view>
       </scroll-view>
     </swiper-item>
