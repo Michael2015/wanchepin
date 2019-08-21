@@ -18,7 +18,7 @@
           {{item.update_time}}
         </view>
       </view>
-      <no-data wx:if="{{list&&list.length===0 || loaded}}" list="{{list}}" />
+      <no-data isLoad="{{loaded}}" wx:if="{{list&&list.length===0 || loaded}}" list="{{list}}" />
     </view>
   </scroll-view>
 </view>
