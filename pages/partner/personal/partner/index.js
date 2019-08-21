@@ -13,7 +13,8 @@ Page({
     list: [],
     all: 0,
     higher: null,
-    default: ''
+    default: '',
+    longEndIndex:-1,
   },
 
   /**
@@ -84,6 +85,14 @@ Page({
    */
   onReady: function () {
 
+  },
+  longTime(event){
+    this.setData({
+      longEndIndex:event.currentTarget.dataset.index
+    })
+  },
+  longEnd(){
+    this.setData({longEndIndex:-1})
   },
   cut(str, len = 15) {
     if (str.length > len) {

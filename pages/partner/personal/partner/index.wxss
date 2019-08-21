@@ -73,6 +73,17 @@ scroll-view{
   height: 0;
   clear: both;
 }
+.longName{
+  position: absolute;
+  left: 0;
+  top: -24rpx;
+  font-size: 20rpx;
+  height: 24rpx;
+  line-height: 24rpx;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
 .list .item{
   width: 16%;
   margin-left:3.6%;

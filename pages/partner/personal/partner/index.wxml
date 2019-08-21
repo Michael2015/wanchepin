@@ -13,12 +13,13 @@
     <input type="text" bindinput="oninput" placeholder="请输入合伙人昵称" placeholder-class="placeholder" />
   </view>
   <view class="list">
-    <view class="item" wx:for="{{list}}" wx:key="index">
+    <view class="item" wx:for="{{list}}" bindlongtap="longTime" bindtouchend="longEnd" wx:key="index" data-index="{{index}}">
+      <view wx:if="{{longEndIndex === index}}" class="longName">{{item.nickname}}</view>
       <view class="avatar">
         <image src="{{item.avatar}}"></image>
       </view>
       <view class="name">{{item.nickname}}</view>
-      <view class="badge" wx:if="{{item.lower_nums}}">{{item.lower_nums}}</view>
+      <view class="badge" class="badge" wx:if="{{item.lower_nums}}">{{item.lower_nums}}</view>
     </view>
   </view>
   <no-data wx:if="{{list&&list.length === 0}}" />
