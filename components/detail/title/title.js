@@ -4,10 +4,20 @@ Component({
     data: {
       type: Object,
     },
+    partner:{
+      type:Object,
+    }
   },
   data: {
     showPlatoonPopup: false,
     showModal:false,
+    joinMask:false,
+    role:0
+  },
+  onload(){
+    this.setData({
+      role:app.globalData.role
+    })
   },
   methods: {
   //领取优惠券
@@ -57,6 +67,24 @@ Component({
     toGPDesc() {
       wx.navigateTo({
         url: '/pages/partner/personal/helper/gongpai'
+      })
+    },
+    checkJoinMask(){
+      this.setData({joinMask:!this.data.joinMask})
+    },
+    joinTeam(){
+      app.http.get('/api/partner/index/join', {spid: this.properties.partner.uid}).then(data => {
+        // 到这里说明已经加入团队了
+        // 直接跳首页
+        wx.showToast({
+          title: '加入成功',
+          icon: 'success',
+          duration: 2000
+        })
+        app.globalData.role = null
+        wx.reLaunch({
+          url: '/pages/index/index'
+        })
       })
     }
   }

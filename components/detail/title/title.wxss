@@ -24,6 +24,14 @@
   -webkit-transform:scaleY(0.5);
   background:#eee; */
 }
+.p em text{
+  display: block;
+  font-size: 25rpx;
+  font-weight: 300;
+}
+.compare{
+  font-size: 30rpx;
+}
 .title{
   width: 100%;
   font-size: 32rpx;
@@ -34,7 +42,8 @@
   color: #e70002;
   margin: 10rpx 0;
   line-height: 40rpx;
-  height: 40rpx;
+  display: flex;
+  justify-content:space-between;
 }
 .content{
   width: 100%;
@@ -192,19 +201,44 @@
 }
 
 .content .p .col-1{
-float:right;
 font-size:25rpx;
 color:#999;
 line-height:38rpx;
 }
-
+.content .p .col-1-compare{
+  font-size:25rpx;
+  color:#999;
+  line-height: 90rpx;
+}
 .content .coupon
 {
   height:38rpx;
   width:85rpx;
   vertical-align:middle;
 }
-
+.joinTeam{
+  margin: 10rpx auto 20rpx;
+  padding: 17rpx 20rpx 17rpx 45rpx;
+  background: rgba(74,144,226,0.1164);
+  font-size: 25rpx;
+  display: flex;
+  justify-content:space-between;
+  border-radius: 54rpx; 
+}
+.joinTeam .join-title .top{
+  color: #4A5EE2;
+}
+.joinTeam .join-title .bottom{
+  font-size: 20rpx;
+  color: #4D59AA;
+}
+.joinTeam .btn{
+  font-size: 25rpx;
+  background: #4A5EE2;
+  color: #FFFFFF;
+  padding: 15rpx 26rpx;
+  border-radius: 36rpx;
+}
 .modal-mask {
   width: 100%;
   height: 100%;
@@ -278,4 +312,58 @@ line-height:38rpx;
   font-size: 25rpx;
   color: #a5a5a5;
   text-decoration: line-through;
+}
+.join-mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background:rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 9000;
+  color: #333333;
+}
+.join-box{
+  font-size: 30rpx;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 0 57rpx;
+  background:rgba(255,255,255,1);
+  border-radius:12rpx;
+  width: 630rpx;
+  height: 330rpx;
+  text-align: center;
+}
+.join-box .inquiry{
+  margin-top: 70rpx;
+}
+.join-box .Explain{
+  color: #4A5EE2;
+  margin: 32rpx auto 0;
+}
+.join-box .Explain image{
+  width: 25rpx;
+  height: 28rpx;
+  vertical-align: middle;
+}
+.join-box .buts{
+  color: #fff;
+  margin-top: 35rpx;
+  display: flex;
+  justify-content:space-between;
+}
+.join-box .buts view{
+  width: 240rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  line-height: 80rpx;
+}
+.yes{
+  background: #E60000;
+}
+.no{
+  background: #DDDDDD;
 }

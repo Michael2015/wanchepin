@@ -309,7 +309,7 @@ function analysisOptions(options, res) {
       })
     }else if(res.is_promoter === 1){
       wx.redirectTo({
-        url: '/pages/partner/detail/detail?id=' + app.globalData.shareInfo.share_product_id +'&from=Recommend'
+        url: '/pages/partner/detail/detail?id=' + app.globalData.shareInfo.share_product_id
       })
     }
   } else {

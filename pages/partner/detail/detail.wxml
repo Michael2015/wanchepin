@@ -125,13 +125,9 @@
             </swiper>
         </view>
         <view class="action-bar">
-            <view class="bar-item" bindtap="toList" wx:if="{{from === 'Home'}}">
+            <view class="bar-item" bindtap="toList">
                 <image src="/assets/image/icon_shop.png" class="image"></image>
                 <view class="text">店铺</view>
-            </view>
-            <view class="bar-item" bindtap="contact" wx:if="{{from === 'Recommend'}}">
-                <image class="image-avatar" src="{{partner.avatar}}"></image>
-                <view class="text">联系</view>
             </view>
             <view class="bar-item" bindtap="checkoutFenXiang">
                 <image src="/assets/image/share.png" class="image"></image>
@@ -142,7 +138,6 @@
             </view>
             <view class="bar-button" bindtap="goSettlement">立即购买</view>
         </view>
-        <contact-user id="contact-view"></contact-user>
     </scroll-view>
     <view class="fenxiang-mask" wx:if="{{fenXiangShow}}">
         <view class="select">

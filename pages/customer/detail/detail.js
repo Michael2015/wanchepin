@@ -60,6 +60,7 @@ Page({
         phone: app.globalData.userInfo.partner_phone
       }
     })
+    this.getPartnerInfo()
     // 调用接口获取详情数据
     this.getDetail()
     // 获取上牌详情
@@ -155,6 +156,7 @@ Page({
           coupon_date:res.coupon.data.date||'',
           coupon_price:res.coupon.data.price||0,
           seckill:res.seckill,
+          vip_price:res.vip_price
         }
       })
     }).catch((e) => {

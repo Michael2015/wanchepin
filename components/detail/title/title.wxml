@@ -5,12 +5,23 @@
         <image class="coupon" src="/assets/image/getcoupon2.png"  wx:if="{{data.coupon_id}}" bindtap="show_modal"></image>
         </view>
         <view class="p">
-        <em wx:if="{{data.seckill.status == 0 || data.seckill.status == -1}}">￥{{data.price}}</em>
-        <em wx:if="{{data.seckill.status == 1}}">
-            <em>￥{{data.seckill.data.price}}</em>
-            <em class="text-u">￥{{data.price}}</em>
-        </em> 
-        <view class="col-1">{{data.sale}}份已售</view></view>
+            <em wx:if="{{(data.seckill.status == 0 || data.seckill.status == -1)&&data.vip_price!=='0.00'}}" class="compare"><text>原价</text>￥{{data.price}}</em>
+            <em wx:elif="{{data.seckill.status == 0 || data.seckill.status == -1}}">￥{{data.price}}</em>
+            <em wx:elif="{{data.seckill.status == 1}}">
+                <em>￥{{data.seckill.data.price}}</em>
+                <em class="text-u">￥{{data.price}}</em>
+            </em>
+            <em wx:if="{{data.seckill.status !== 1&&data.vip_price!=='0.00'}}" class="compare" style="color:#4A5EE2;text-align: center"><text>合伙人价</text>￥{{data.vip_price}}</em>
+            <view wx:if="{{data.seckill.status !== 1&&data.vip_price!=='0.00'}}" class="col-1 col-1-compare">{{data.sale}}份已售</view>
+            <view wx:else class="col-1">{{data.sale}}份已售</view>
+        </view>
+        <view class="joinTeam" wx:if="{{role === 0}}">
+            <view class="join-title">
+                <view class="top">加入合伙人，四重优惠等你拿</view>
+                <view class="bottom">返利 + 津贴 + 带团队分润 + 部分商品合伙人价</view>
+            </view>
+            <view class="btn" bind:tap="checkJoinMask">立即加入</view>
+        </view>
         <view class="msg" wx:if="{{data.is_platoon}}">下单即可享免单</view>
         <view class="msg" wx:if="{{data.is_platoon}}">合伙人推荐购买即可享返利</view>
         <view class="s">
@@ -58,4 +69,14 @@
                     <image src="/assets/image/closeTip.png"></image>
             </view>
         </view>
+</view>
+<view class="join-mask"  catchtouchmove="preventTouchMove" wx:if="{{joinMask}}">
+    <view class="join-box">
+        <view class="inquiry">您正在加入推荐人的团队，是否确定？</view>
+        <view class="Explain"><image src="/assets/image/lever.png" />查看合伙人等级及权益说明</view>
+        <view class="buts">
+            <view class="no" bind:tap="checkJoinMask">否</view>
+            <view class="yes" bind:tap="joinTeam">是</view>
+        </view>
+    </view>
 </view>

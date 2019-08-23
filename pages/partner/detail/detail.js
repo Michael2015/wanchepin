@@ -1,5 +1,4 @@
 import compositePoster from '../../../utils/compositePoster/compositePoster'
-import Contact from '../../../utils/contactUser/contactUser'
 const app = getApp()
 let WxParse = require('../../../utils/wxParse/wxParse.js')
 var self;
@@ -54,18 +53,8 @@ Page({
     seckill:'',
     time_backward:[],
     timeList:[],
-    //监视从哪进来的商品详情
-    from:'',
     //控制分享显示
     fenXiangShow:false,
-    //
-    partner: {
-      nickname: '',
-      avatar: ''
-    },
-  },
-  contact() {
-    Contact.show(this.data.partner)
   },
   toList() {
     console.log(app.globalData)
@@ -83,19 +72,9 @@ Page({
     self = this;
     this.setData({
       id: options.id || 2, // 获取商品id
-      from: options.from || 'Home', //获取来源  
       seckill:'',
       info: app.varStorage.get('storeDetail')
     })
-    if(this.data.from === "Recommend"){
-      this.setData({
-        partner: {
-          nickname: app.globalData.userInfo.partner_name,
-          avatar: app.globalData.userInfo.partner_avatar,
-          phone: app.globalData.userInfo.partner_phone
-        }
-      })
-    }
     // 调用接口获取详情数据
     this.getDetail()
     // 获取上牌详情
@@ -249,7 +228,7 @@ Page({
           coupon_title:res.coupon.data.title||'',
           coupon_price:res.coupon.data.price||0,
           coupon_date:res.coupon.data.date||'',
-          seckill:res.seckill,
+          seckill:res.seckill
         }
       });
     }).catch((e) => {
